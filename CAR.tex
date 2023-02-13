@@ -69,10 +69,10 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{Title}
+\Title{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic }
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{Title}
+\TitleCitation{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic }
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
@@ -129,7 +129,7 @@ $^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechn
 \section{Materials and Methods}
 
 %----------- subsection ----------->
-\subsection{Subsection}
+\subsection{Histogram equalisation}
 
 \begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids,style=mystyle,label={lst01}]
 exec bash
@@ -167,23 +167,72 @@ gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
 echo "24 10 Quadratic" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
 gmt psscale -Dx0i/-0.4i+w5i/0.15i+h+jTC+e+n -O -K -Cc.cpt -Bx1 -By+l"z@-n@-" >> $ps
 gmt psscale -Dx0i/-1.0i+w5i/0.15i+h+jTC+e+n -O -K -Cq.cpt -Bx1 -By+l"z@-q@-" >> $ps
-# GMT logo
 gmt logo -Dx0.0/-4.5c+o-1.0c/0.2c+w2c -O -K >> $ps
-# Subtitle
 gmt pstext -R0/10/0/15 -JX10/10 -X-8.0 -Y6.5c -N -O \
 -F+f14p,Palatino-Roman,black+jLB >> $ps << EOF
 0.0 11.5 Central African Republic: histogram equalization of topographic grid:
 1.5 10.7 ETOPO1 DEM Global Relief Model 1 arc min resolution
 EOF
-# Convert to image file by GhostScript
 gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
 \end{lstlisting}
 
 %----------- subsection ----------->
-\subsection{Subsection}
+\subsection{Geoid}
+
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst01}]
+exec bash
+gmt grdconvert n00e00/w001001.adf geoid_CF.grd
+gdalinfo geoid_CF.grd -stats
+gmt makecpt -Cjet.cpt -T-18/18 > colors.cpt
+ps=Geoid_CF.ps
+gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2.5/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
+gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    -Bpx1f1a1 -Bpyg1f1a1 -Bsxg1 -Bsyg1 \
+    -B+t"Earth geoid model on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg2f0.2a4+l"Color scale 'jet': dark to light blue, white, yellow and red [C=RGB], -T-18/18]" \
+    -I0.2 -By+lm -O -K >> $ps
+gmt psbasemap -R -J -Lx14.5c/-2.3c+c50+w300k+l"Mercator projection. Scale (km)"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thick,white -Wthick,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.1c -Y4.5c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+3.0 10.4 Earth geoid image EGM2008 vertical datum 2.5 min resolution
+EOF
+gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
+\end{lstlisting}
 
 %----------- subsection ----------->
-\subsection{Subsection}
+\subsection{IGPP Earth Free-Air Anomaly}
+
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst01}]
+exec bash
+gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
+gdalinfo grav_CF.grd -stats
+gmt makecpt -Chaxby.cpt -T-85/80 > colors.cpt
+ps=Grav_CF.ps
+gmt grdimage grav_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.0i -P -I+a15+ne0.75 -Xc -K > $ps
+gmt grdcontour grav_CF.grd -R -J -C20 -A40 -Wthinner -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    -Bpx4f2a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 \
+    -B+t"Free-air gravity anomaly on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1+w15.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg20f1a10+l"Color scale 'haxby' Bill Haxby's color scheme for geoid & gravity [C=RGB] -T-200/200]" \
+    -I0.2 -By+l"mGal" -O -K >> $ps
+gmt psbasemap -R -J -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thickest,deeppink1 -Wthin,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.5c -Y5.0c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+2.3 9.2 IGPP Global Earth Free-Air Anomaly, 0.025 mGal resolution
+EOF
+gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -201,6 +250,13 @@ gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
 \centering
 	\includegraphics[width=14.0 cm]{Geoid_CF.jpg}
 	\caption{Earth geoid map of Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid. Cartography source: authors.
+	\label{fig01}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Grav_CF.jpg}
+	\caption{IGPP Earth Free-Air Anomaly on Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid. Cartography source: authors.
 	\label{fig01}}
 \end{figure}
 
