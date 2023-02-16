@@ -120,14 +120,35 @@ Interactions between geophysical processes and geodynamics of lithosphere play a
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Topo_CF.jpg}
-	\caption{Topographic map of Central African Republic. Mapping software: Generic Mapping Tools (GMT) scripting toolset version 6.1.1, \cite{Wessel}. Data source: GEBCO/SRTM \cite{GEBCO,SRTM}. Cartography source: authors.
+	\includegraphics[width=14.0 cm]{Fig_01.jpg}
+	\caption{Topographic map of Central African Republic. Mapping software: Generic Mapping Tools (GMT) scripting toolset version 6.1.1, \cite{Wessel}. Data source: GEBCO/SRTM \cite{GEBCO,SRTM}. Cartography: authors.
 	\label{fig01}}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+\makebox[1.0\linewidth][r]{%
+%\centering
+	\includegraphics[width=14.0 cm]{Fig_02.jpg}
+}
+	\caption{Geologic provinces in CAR. Software: QGIS. Data source: USGS. Cartography: authors.
+	\label{fig02}}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[1.0\linewidth][r]{%
+%\centering
+	\includegraphics[width=14.0 cm]{Fig_03.jpg}
+}
+	\caption{Geologic units and lithology in CAR. Software: QGIS. Data: USGS. Cartography: authors.
+	\label{fig03}}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Materials and Methods}
+
+The geologic maps were prepared using QGIS software version 3.22.1.
 
 %----------- subsection ----------->
 \subsection{Histogram equalisation}
@@ -244,45 +265,45 @@ gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 \begin{figure}[H]
 \makebox[1.0\linewidth][r]{%
 %\centering
-	\includegraphics[width=18.0 cm]{HistCAR.jpg}
+	\includegraphics[width=18.0 cm]{Fig_04.jpg}
 }
 	\caption{Histogram equalisation of the topography grids on CAR based on the ETOPO1 raster data. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: ETOPO1. Cartography source: authors.
-	\label{fig01}}
+	\label{fig04}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Geoid_CF.jpg}
+	\includegraphics[width=14.0 cm]{Fig_05.jpg}
 	\caption{Earth geoid map of Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{Pavlis}. Magnetic declination (magnetic rose in lower right corner) is given for Votofo, CAR: +1.63° (east, positive). Cartography source: authors.
-	\label{fig01}}
+	\label{fig05}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Grav_CF.jpg}
+	\includegraphics[width=14.0 cm]{Fig_06.jpg}
 	\caption{IGPP Earth Free-Air Anomaly on Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{SANDWELL20211059}. Cartography source: authors.
-	\label{fig01}}
+	\label{fig06}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Grav_CF_vert.jpg}
+	\includegraphics[width=14.0 cm]{Fig_07.jpg}
 	\caption{Derivative of the IGPP Earth’s gravity field on Central African Republic: vertical gravity gradient. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{SANDWELL20211059}. Cartography source: authors.
-	\label{fig01}}
+	\label{fig07}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Magnet_CF_wdmam.jpg}
+	\includegraphics[width=14.0 cm]{Fig_08.jpg}
 	\caption{Magnetic anomaly in CAR based on WDMAM with 3 arc minute resolution. Dark blue area indicate the negative Bangui magnetic anomaly in the centre of CAR. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: WDMAM \cite{Lesur}. Cartography source: authors.
-	\label{fig01}}
+	\label{fig08}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.0 cm]{Magnet_CF.jpg}
+	\includegraphics[width=14.0 cm]{Fig_09.jpg}
 	\caption{Magnetic anomaly in CAR based on EMAG2 with 2 arc minute resolution. Dark blue area indicate the negative Bangui magnetic anomaly. Black and dark grey areas mean the "no data" areas where no magnetic survey was done in the original dataset. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EMAG2 \cite{Meyer}. Cartography source: authors. 
-	\label{fig01}}
+	\label{fig09}}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -312,12 +333,17 @@ The following abbreviations are used in this manuscript:\\
 \noindent 
 \begin{tabular}{@{}ll}
 CAR & Central African Republic \\
+CGMW & Commission for the Geological Map of the World \\
 EGM2008 & Earth Gravitational Model 2008 \\
 EMAG2 & Earth Magnetic Anomaly Grid \\
 ETOPO1 & Earth Topography Model with 1 arc minute resolution\\
 GEBCO & General Bathymetric Chart of the Oceans \\
 GMT & Generic Mapping Tools \\
-SRTM & Shuttle Radar Topography Mission
+IAGA & International Association of Geomagnetism and Aeronomy \\
+IGPP & Institute of Geophysics and Planetary Physics \\
+SRTM & Shuttle Radar Topography Mission \\
+USGS & United States Geological Survey \\
+WDMAM & World Digital Magnetic Anomaly Map \\
 \end{tabular}
 }
 
