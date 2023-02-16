@@ -69,7 +69,7 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic }
+\Title{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic}
 
 % MDPI internal command: Title for citation in the left column
 \TitleCitation{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic }
@@ -103,7 +103,7 @@ $^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechn
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{
-Interactions between geophysical processes and geodynamics of lithosphere play a crucial role in geologic structure of the Earth's crust. The Bangui magnetic anomaly is a notable feature in the lithospheric structure of Central African Republic (CAR) resulted from the complex tectonic evolution. We present a series of maps to obtain the coherence in the geophysical data and magnetic anomaly field from integration of free-air altimetric gravity, magnetic EMAG2 Earth data, geoid EGM2008 model and topographic SRTM/ETOPO1 relief to get insights in the geodynamics of CAR region. Histogram equalization of the topographic grids was performed for partition of raster grid files into equal-area patches of data ranged by segments with relative highs and lows of the relief, and to compare the original data with equalized, normalized and quadratic models. the scripts used for cartographic data processing are presented and commented. The consistency and equalization of topography, gravity and geoid data was based using GMT modules 'grdfft' and 'grdhisteq' modules. On the presented maps, we demonstrated the correlation between the distribution of rocks with high magnetism in the central part of the anomaly, geologic fields of granites, greenstone belts, and metamorphosed basalts as rock exposures, negative Bouguer anomaly (<-80 mGal), low geoid values (< -12 m) and the elongated shape of the magnetic anomaly with extreme negative values ranging within the amplitude of -1000 to -200 nT. The fusion of the multi-source datasets in the reported work provides a new insight into the analyses of crustal thicknesses and the average density of the Earth in CAR, as well as magnitude of the magnetic fields with notable deviations caused by magnetic flux density in Bangui area related to the distribution of mineral resources.}
+Interactions between geophysical processes and geodynamics of lithosphere play a crucial role in geologic structure of the Earth's crust. The Bangui magnetic anomaly is a notable feature in the lithospheric structure of Central African Republic (CAR) resulted from the complex tectonic evolution. We present a series of maps to obtain the coherence in the geophysical data and magnetic anomaly field from integration of free-air altimetric gravity, magnetic EMAG2 Earth data, geoid EGM2008 model and topographic SRTM/ETOPO1 relief to get insights in the geodynamics of CAR region. Histogram equalization of the topographic grids was performed for partition of raster grid files into equal-area patches of data ranged by segments with relative highs and lows of the relief, and to compare the original data with equalized, normalized and quadratic models. The scripts used for cartographic data processing are presented and commented. The consistency and equalization of topography, gravity and geoid data was based using GMT modules 'grdfft' and 'grdhisteq' modules. On the presented maps, we demonstrated the correlation between the distribution of rocks with high magnetism in the central part of the anomaly, geologic fields of granites, greenstone belts, and metamorphosed basalts as rock exposures, negative Bouguer anomaly (<-80 mGal), low geoid values (< -12 m) and the elongated shape of the magnetic anomaly with extreme negative values ranging within the amplitude of -1000 to -200 nT. The fusion of the multi-source datasets in the reported work provides a new insight into the analyses of crustal thicknesses and the average density of the Earth in CAR, as well as magnitude of the magnetic fields with notable deviations caused by magnetic flux density in Bangui area related to the distribution of mineral resources.}
 
 % Keywords
 \keyword{Programming; geophysics; GMT; mapping; Africa; geology; geodynamics; geomatics; data analysis; cartography} 
@@ -190,11 +190,15 @@ gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2.5/11.5 -JM6.5i -P -Xc -I+a15+ne
 gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
 gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
     --FORMAT_GEO_MAP=ddd:mm:ssF \
+    --MAP_GRID_CROSS_SIZE_PRIMARY=0.8c \
+    --MAP_GRID_CROSS_SIZE_SECONDARY=0.5c \
     -Bpx1f1a1 -Bpyg1f1a1 -Bsxg1 -Bsyg1 \
     -B+t"Earth geoid model on Central African Republic" -O -K >> $ps
 gmt psscale -Dg14/1.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
     -Bg2f0.2a4+l"Color scale 'jet': dark to light blue, white, yellow and red [C=RGB], -T-18/18]" \
     -I0.2 -By+lm -O -K >> $ps
+gmt psbasemap -R -J -Tmg26/3.6+w3.0c+d1.63+t45/10/5+ithin,lightgoldenrod+p0.1p,gold+l+jCM \
+    -O -K >> $ps
 gmt psbasemap -R -J -Lx14.5c/-2.3c+c50+w300k+l"Mercator projection. Scale (km)"+f \
     -UBL/-0p/-70p -O -K >> $ps
 gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thick,white -Wthick,darkslategray -Df -O -K >> $ps
@@ -224,7 +228,7 @@ gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
 gmt psscale -Dg14/1+w15.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
     -Bg20f1a10+l"Color scale 'haxby' Bill Haxby's color scheme for geoid & gravity [C=RGB] -T-200/200]" \
     -I0.2 -By+l"mGal" -O -K >> $ps
-gmt psbasemap -R -J -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
+gmt psbasemap -R -J -Tdg15/10.5+w1.5c+f3+l -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
     -UBL/-0p/-70p -O -K >> $ps
 gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thickest,deeppink1 -Wthin,darkslategray -Df -O -K >> $ps
 gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
@@ -250,7 +254,7 @@ gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 \begin{figure}[H]
 \centering
 	\includegraphics[width=14.0 cm]{Geoid_CF.jpg}
-	\caption{Earth geoid map of Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{Pavlis}. Cartography source: authors.
+	\caption{Earth geoid map of Central African Republic. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{Pavlis}. Magnetic declination (magnetic rose in lower right corner) is given for Votofo, CAR: +1.63° (east, positive). Cartography source: authors.
 	\label{fig01}}
 \end{figure}
 
@@ -263,8 +267,15 @@ gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 
 \begin{figure}[H]
 \centering
+	\includegraphics[width=14.0 cm]{Magnet_CF_wdmam.jpg}
+	\caption{Map of magnetic anomaly in CAR based on WDMAM (3 arc minute resolution). Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: WDMAM \cite{Lesur}. Cartography source: authors.
+	\label{fig01}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
 	\includegraphics[width=14.0 cm]{Magnet_CF.jpg}
-	\caption{Map of magnetic anomaly in CAR. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EMAG2 \cite{Meyer}. Cartography source: authors. Note: black and dark grey areas mean the "no data" areas where no magnetic survey was done in the original dataset.
+	\caption{Map of magnetic anomaly in CAR based on EMAG2 (2 arc minute resolution). Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EMAG2 \cite{Meyer}. Cartography source: authors. Note: black and dark grey areas mean the "no data" areas where no magnetic survey was done in the original dataset.
 	\label{fig01}}
 \end{figure}
 
@@ -277,7 +288,7 @@ gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
 
-\funding{The publication was funded by the Editorial Office of XXXX, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
+\funding{The publication was funded by the Editorial Office of \emph{Minerals}, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
 
 \institutionalreview{Not applicable.}
 
