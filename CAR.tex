@@ -165,6 +165,8 @@ The Paleozoic (Pz) period is notable for the emergence and geomorphic erosion in
 %----------- section ----------->
 \section{Materials and Methods}
 
+The programming approaches have emerged as powerful alternatives to the traditional cartography based on using GIS (e.g., \cite{TRAORE2020103933,RUNGE2005311,TRAORE2021100114}). They operate with scripts whose lines of code can either be used as a sequence for lines and include diverse modules used for plotting various cartographic elements on the maps \cite{Lemenkova202230,Lemenkova202228}, or as instruments in remote sensing data processing \cite{Lemenkova202229,Lemenkova202227}
+
 The geologic maps were prepared using QGIS software version 3.22.1.
 
 %----------- subsection ----------->
@@ -341,20 +343,23 @@ rm -f cross.txt *_tmp.nc ?.cpt bbox
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{Results}
 
-The analysis of the topographic grid reveals a local depression in the equalised raster grids which corresponds to the geoid and gravity data in the central region of CAR. Further, the data are contrasted in the equalised and quadratic models (Figure \ref{fig04}, b) and d)) where topographic derivatives reveal a saddle structure in the 1-min topographic ETOPO raster in the region of the magnetic anomaly. This proves the earlier results reporting the ring-shaped formation around the region of magnetic anomaly that has an outer ring diameter of over 810 km and an inner ring diameter at 490 km \cite{GIRDLER199245}.
+The analysis of the topographic grid reveals a local depression in the equalised raster grids which corresponds to the geoid and gravity data in the central region of CAR. Further, the data are contrasted in the equalised and quadratic models (Figure \ref{fig04}, b) and d)) compared to the original and normalised grids (Figure \ref{fig04}, a) and c)), where topographic derivatives reveal a saddle-shaped structure in the 1-min topographic ETOPO raster in the region of the magnetic anomaly. This proves the earlier results reporting the ring-shaped formation around the region of magnetic anomaly that has an outer ring diameter of over 810 km and an inner ring diameter at 490 km \cite{GIRDLER199245}. 
 
 \begin{figure}[H]
 \makebox[1.0\linewidth][r]{%
 %\centering
-	\includegraphics[width=18.0 cm]{Fig_04.jpg}
+	\includegraphics[width=17.0 cm]{Fig_04.jpg}
 }
 	\caption{Histogram equalisation of the topography grids on CAR based on the ETOPO1 raster data. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: ETOPO1. Cartography source: authors.
 	\label{fig04}}
 \end{figure}
 
-The magnetic anomaly in Bangui area was mapped and compared with the geoid grid (Figure \ref{fig05}) to show the coherency with structural variations in the crust reflected in gravity data of geoid. The distribution of the magnetic contrasts continue up to a depth of 160 km where crustal thickness is about 40 km \cite{DORBATH1985231}, indicating a close relation between the Bangui magnetic anomaly and of the geoid and geophysical data that result in similar patterns contrast due to the Panafrican orogenic events \cite{MOLOTOAKENGUEMBA2008214}. Since the magnetic anomaly continues within the Central African Orogenic Belt which is a subject of the cumulative effects from multiple tectonic events during the geological development in Precambrian and later periods, it has a thin lithosphere structure beneath the Bangui magnetic anomaly that well correlates with gravity data \cite{GOUSSINGALAMO2018326}.
+The geoid grid was mapped and compared with the magnetic anomaly in Bangui area (Figure \ref{fig05}) to show the coherency with structural variations in the crust reflected in gravity values of geoid. Thus, the distribution of the magnetic contrasts continue up to a depth of 160 km where crustal thickness is about 40 km \cite{DORBATH1985231}, indicating a close relation between the Bangui magnetic anomaly and of the geoid and geophysical data that result in similar patterns contrast due to the Panafrican orogenic events \cite{MOLOTOAKENGUEMBA2008214}. Since the Bangui magnetic anomaly continues within the Central African Orogenic Belt which is a subject of the cumulative effects from multiple tectonic events during the geological development in Precambrian and later periods, it has a thin lithosphere structure beneath the magnetic anomaly that well correlates with gravity data \cite{GOUSSINGALAMO2018326}.
+
+In turn the gravity anomalies that are reflected in lower geoid values correspond to a thinner lithospheric thickness and Moho depths associated with the isostatic surface topography of the region \cite{Stunff}. Thus, beneath the magnetic anomaly, the geoid in CAR has values from -4 to -8 m, which is lower than the western region where values above 16 m are recorded.
 
 \begin{figure}[H]
 \centering
@@ -363,12 +368,16 @@ The magnetic anomaly in Bangui area was mapped and compared with the geoid grid 
 	\label{fig05}}
 \end{figure}
 
+Gravity anomalies and amplitude contrasts (Figure \ref{fig06}) result from the lower lithospheric depth and crustal density which correspond to the tectonic plate movements and associated heterogeneities in mantle density \cite{Boukeke}. As a result, similar gravity pattern at the surface closely follow the tectonic structure in the Central African Orogenic Belt due to active mantle flow and thermal convection \cite{Daly}. The analysis of the Figure \ref{fig06} corresponds to the earlier maps \cite{Albouy} and reveal the negative values from -80 to -60 mGal over the study area (Figure \ref{fig06}. In contrast, higher values over +50 mGal are clearly visible in the western and southwestern regions of CAR that correspond to the regional outcrops of the Lower Cretaceous rocks (Figure \ref{fig03}) in the Zaire geologic province (Figure \ref{fig02}).
+
 \begin{figure}[H]
 \centering
 	\includegraphics[width=14.0 cm]{Fig_06.jpg}
 	\caption{IGPP Earth Free-Air Anomaly on Central African Republic. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{SANDWELL20211059}. Cartography source: authors.
 	\label{fig06}}
 \end{figure}
+
+The geologic structure in this region includes the Paleozoic glaciogenic clastic sedimentary formations include tillites, diamictites, argillite, mudstone which crop out from several sedimentary formations \cite{MILESI2006571}.
 
 \begin{figure}[H]
 \centering
