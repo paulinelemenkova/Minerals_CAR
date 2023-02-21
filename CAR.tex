@@ -165,11 +165,11 @@ Rich mineral resources of CAR can be illustrated by the alluvial diamonds in the
 
 %----------- section ----------->
 \section{Materials and Methods}
+This study is based on the several gravity and geologic databases: two gravity databases (EMAG2 and WDMAM), satellite-derived gravity data (EGM2008) and topography data (GEBCO/SRTM, ETOPO1 and IGPP). These datasets were processed separately by the GMT scripts presented below. The geologic maps were built upon the USGS data using QGIS software version 3.22.1. 
 
 The programming approaches have emerged as powerful alternatives to the traditional cartography based on using GIS (e.g., \cite{TRAORE2020103933,RUNGE2005311,TRAORE2021100114}). They operate with scripts whose lines of code can either be used as a sequence for lines and include diverse modules used for plotting various cartographic elements on the maps \cite{4814952,Lemenkova202230,8588718,Lemenkova202301,Lemenkova202228}, or as instruments in remote sensing data processing \cite{9964623,Lemenkova202229,7577632,Lemenkova202227}
 
-The geologic maps were prepared using QGIS software version 3.22.1.
-
+The geologic 
 %----------- subsection ----------->
 \subsection{Histogram equalisation}
 
@@ -221,7 +221,7 @@ gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
 %----------- subsection ----------->
 \subsection{Geoid}
 
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst01}]
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
 exec bash
 gmt grdconvert n00e00/w001001.adf geoid_CF.grd
 gdalinfo geoid_CF.grd -stats
@@ -252,8 +252,9 @@ gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
 
 %----------- subsection ----------->
 \subsection{IGPP Earth Free-Air Anomaly}
+Gravity data were extracted from the EGM2008 database with global coverage resulting from the spherical harmonic models of the Earth's gravitational potential by \cite{Pavlis}. Diverse data processing algorithms were applied using GMT modules as shown below in Listing \ref{lst03}. The raster image was visualised using the 'grdimage' modules with isolines added as contours with 20 m interval by the 'grdcontour' module. The 'Haxby' colour palette was applied, specially designed for gravity grids and visualising the geophysical data. The colour palette was adjusted according to the amplitude and geometry of the observed values in the raster grids, which were checked using the 'gdalinfo' module. The rest of the cartographic elements was added using the sequence of modules GMT such as 'psbasemap', 'pscoast', 'pstext' and more, as shown in Listing \ref{lst03}.
 
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst01}]
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst03}]
 exec bash
 gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
 gdalinfo grav_CF.grd -stats
@@ -279,7 +280,7 @@ EOF
 gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 \end{lstlisting}
 
-\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst01}]
+\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
 # Extract subsets of img/grd files in geographic format ----------------->
 gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
 gmt grdconvert n00e00/w001001.adf geoid_CF.grd
@@ -412,7 +413,7 @@ Figure \ref{fig09} shows a detailed view of the anomaly derived from the 2-arc m
 
 Figure \ref{fig10} demonstrate the coherency between the geophysical data, hypsometry and the Bangui magnetic anomaly fields. Thus, the gravity data with -120 mGal Bouguer anomaly, the associated negative depressions in the geoid derived from the EGM2008 and the ETOPO1-based topographic hypsometry over CAR all correlate with the negative values of the Bangui magnetic anomaly  that are below -1000 nT. At the same time, the comparison of the extent of Bangui magnetic anomaly (Figures \ref{fig08} and {fig09} with enlarged view), the composed plot showing the coherency with geophysical data and the geologic maps of CAR (Figures \ref{fig03} and \ref{fig04}) demonstrates the predominant distribution of the Precambrian (pCm) rocks in this critical region that are exposed just under the central area of the magnetic anomaly and depressions in gravity. 
 
-The analysis of the spatial extent of the raster grids visualised using combined magnetic, and Bouguer gravity data (WDMAM, EGM2008, IGPP and EMAG2) shows the integrity of the geophysical and geomagnetism in CAR. Using this facetted plot, the correlation is visible between the lowest magnetic data in the extension between the 3°N and 7°N  (contoured as white square in Figure \ref{fig10}) and the corresponding elongated negative depression in the free-air gravity over at 4°N over the basement of West Zair Precambrian Belt which also has a south-west-north-east extension over the territory of CAR. Such correspondence is related to the variations in crustal thicknesses in this region of CAR caused by the tectonic processes, as discussed above.
+Spatial representativeness of the extent in the raster grids (Figure \ref{fig10}) visualised using combined magnetic, and Bouguer gravity data (WDMAM, EGM2008, IGPP and EMAG2) shows the integrity of the geophysical and geomagnetism in CAR. Using this facetted plot, the correlation is visible between the lowest magnetic data in the extension between the 3°N and 7°N  (contoured as white square in Figure \ref{fig10}) and the corresponding elongated negative depression in the free-air gravity over at 4°N over the basement of West Zair Precambrian Belt which also has a south-west-north-east extension over the territory of CAR. Such correspondence is related to the variations in crustal thicknesses in this region of CAR caused by the tectonic processes, as discussed above. This result allowed the observation of the interrelation of gravity anomalies, with amplitudes ranging from -85 to +80 mGal over CAR with negative values beneath the magnetic anomaly. These contrasts point at the extent of major tectonic structures of CAR:, i.e., the Central African Orogenic Belt on the Precambrian shield and the northern part of the Congo Craton.
 
 \begin{figure}[H]
 \centering
@@ -428,7 +429,9 @@ Detecting the patterns in the lithospheric structure using the integrated mappin
 
 Thus, by utilizing the ’grdhisteq’ module of GMT that models the data values and divides a grid file into equal patches, we performed a histogram equalisation of the topographic ETOPO1 image covering CAR with four cases of relief modelling with the topography divided into the equal-area segments for approximation of the regional topography using equalised, normalized, quadratic and original models. As a result, using Gaussian approximation ,the smooth distribution of the topographic values was demonstrated with notable peaks and depressions in the elevation of CAR that are comparable with geophysical and magnetic grids. The  ’grdfft’ module that couples different grids and performs computation on grids in the frequency domain using Fast Fourier Transform (FFT), the coherency between vertical gradient and free-air gravity anomaly was plotted and visualised along with grids on magnetic, topographic and gravity data. 
 
-We have tested our proposed techniques in the context of the geologic-geophysical setting of CAR where extreme magnetic anomaly is presented in the Bangui area. Overall, seven datasets are processed, visualised, evaluated and analysed: geoid EGM2008, IGPP, GEBOC/SRTM, ETOPO1, EMAG2, WDMAM and USGS geologic datasets. As future work we plan three directions. First, to integrate other datasets to increase of our current dataset selection over central African region. Second, to extend the current methods of cartographic scripting by other modules of GMT. Third, to develop target study area in neighbouring regions of Africa to extend the applications of the proposed cartographic scripting methods. Moreover, mapping the magnetic and gravity anomalies analysed in the context of the regional geologic and tectonic development of CAR region may contribute to the mineral exploration in this area. With this regard, mapping the coherency between the Bangui magnetic anomaly, geophysical data and geologic setting for mineral resource distribution has a direct practical impact on the economic exploration of mineral resources which is of importance in CAR.
+We have tested our proposed techniques in the context of the geologic-geophysical setting of CAR where extreme magnetic anomaly is presented in the Bangui area. Overall, seven datasets are processed, visualised, evaluated and analysed: geoid EGM2008, IGPP, GEBOC/SRTM, ETOPO1, EMAG2, WDMAM and USGS geologic datasets. As future work we plan three directions. First, to integrate other datasets to increase of our current dataset selection over central African region. Second, to extend the current methods of cartographic scripting by other modules of GMT. Third, to develop target study area in neighbouring regions of Africa to extend the applications of the proposed cartographic scripting methods. 
+
+Moreover, in CAR, data related to lithospheric structure and tectonic models along with their effects on geophysical and geomagnetic data are very limited. With this regard, mapping the magnetic and gravity anomalies analysed in the context of the regional geologic and tectonic development of CAR region contributes both to the theoretical investigation on geotectonic and geological setting in this area and to the practical increase of data aimed at mineral exploration in CAR. With respect to practical geologic exploration of natural resources in CAR, mapping the coherency between the Bangui magnetic anomaly, geophysical data and geologic setting for mineral resource distribution contributes to the analysis of Earth's structure and thus has a direct impact on the economic exploration of mineral resources which is of importance in CAR.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
