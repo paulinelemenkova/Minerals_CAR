@@ -53,7 +53,7 @@
     emphstyle=\color{deepred},
     numberstyle=\tiny\color{deepmagenta},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\scriptsize,
+    basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -165,11 +165,8 @@ Rich mineral resources of CAR can be illustrated by the alluvial diamonds in the
 
 %----------- section ----------->
 \section{Materials and Methods}
-This study is based on the several gravity and geologic databases: two gravity databases (EMAG2 and WDMAM), satellite-derived gravity data (EGM2008) and topography data (GEBCO/SRTM, ETOPO1 and IGPP). These datasets were processed separately by the GMT scripts presented below. The geologic maps were built upon the USGS data using QGIS software version 3.22.1. 
+This study is based on the several gravity and geologic databases: two gravity databases (EMAG2 and WDMAM), satellite-derived gravity data (EGM2008) and topography data (GEBCO/SRTM, ETOPO1 and IGPP). The geologic maps were built upon the USGS data using QGIS software version 3.22.1, while the other datasets were processed separately by the GMT scripts by codes presented below. The programming approaches with codes used for mapping have emerged as powerful alternatives to the traditional cartography based on using GIS (e.g., \cite{TRAORE2020103933,RUNGE2005311,TRAORE2021100114}). They operate with scripts whose lines of code can either be used as a sequence for lines and include diverse modules used for plotting various cartographic elements on the maps \cite{4814952,Lemenkova202230,8588718,Lemenkova202301,Lemenkova202228}, or as instruments in remote sensing data processing \cite{9964623,Lemenkova202229,7577632,Lemenkova202227}
 
-The programming approaches have emerged as powerful alternatives to the traditional cartography based on using GIS (e.g., \cite{TRAORE2020103933,RUNGE2005311,TRAORE2021100114}). They operate with scripts whose lines of code can either be used as a sequence for lines and include diverse modules used for plotting various cartographic elements on the maps \cite{4814952,Lemenkova202230,8588718,Lemenkova202301,Lemenkova202228}, or as instruments in remote sensing data processing \cite{9964623,Lemenkova202229,7577632,Lemenkova202227}
-
-The geologic 
 %----------- subsection ----------->
 \subsection{Histogram equalisation}
 
@@ -280,6 +277,10 @@ EOF
 gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 \end{lstlisting}
 
+\subsection{Coherency of geophysical grids}
+
+The comparison of several maps allow the analysis of the correspondence of the crustal structure in the CAR region, the estimation of topographic heights and hypsometry and coherency in gravity and vertical gravity gradient. Such data integration allows better understanding of the geophysical and topographic responses on the inner behaviour of the lithosphere and tectonic structure of CAR region, and their correspondence with magnetic contrasts. The analyses of the coherency used for plotting the graph was performed using the GMT module 'grdfft' which process the data using the Fast Fourier Transform, estimates the cross-spectral for the co-registered gravity grids (mGal), and reports the result as functions of the symmetry reflection between the both grids. To this end, the data were compiled and processed using the code in Listing \ref{lst04}. 
+
 \begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
 # Extract subsets of img/grd files in geographic format ----------------->
 gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
@@ -346,7 +347,7 @@ rm -f cross.txt *_tmp.nc ?.cpt bbox
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
+%\pagebreak
 \section{Results}
 
 The analysis of the topographic grid reveals a local depression in the equalised raster grids which corresponds to the geoid and gravity data in the central region of CAR. Further, the data are contrasted in the equalised and quadratic models (Figure \ref{fig04}, b) and d)) compared to the original and normalised grids (Figure \ref{fig04}, a) and c)), where topographic derivatives reveal a saddle-shaped structure in the 1-min topographic ETOPO raster in the region of the magnetic anomaly. This proves the earlier results reporting the ring-shaped formation around the region of magnetic anomaly that has an outer ring diameter of over 810 km and an inner ring diameter at 490 km \cite{GIRDLER199245}. 
