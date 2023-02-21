@@ -170,6 +170,8 @@ This study is based on the several gravity and geologic databases: two gravity d
 %----------- subsection ----------->
 \subsection{Histogram equalisation}
 
+The equalisation of the topographic grids was determined by means of the 'grdhisteq' module of the GMT by four different approaches in modelling elevation data: original, equalised, quadratic and normalised. A sequence of different GMT auxiliary modules was used to plot the map: 'pscoast', 'makecpt', 'grdimage', 'psscale' and annotations added by a combination of 'echo' and 'pstext'. The parameters of the commands are defined for fine cartographic adjustments and presented as a full code in Listing \ref{lst01}. The comparison of the processed topographic grids regularised the non-linear models in hypsometry to evaluate the extremities in the data covering the regions and highlight the depressions and peaks in the elevation models.
+
 \begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids,style=mystyle,label={lst01}]
 exec bash
 gmt grdcut ETOPO1_Ice_g_gmt4.grd -R14/28/2/11.5 -Gcf1_relief.nc
