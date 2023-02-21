@@ -142,7 +142,7 @@ The geology of CAR is notable by the presence of the two prominent greenstone be
 
 The geochemistry of the greenstone belts also includes the metamorphic minerals of the greenschist facies, pyroxenes and olivines \cite{POIDEVIN199497}. The presence of back-arc tholeiites and arc-related greywackes argues for a compressive margin plate boundary for the greenstone belts pointing at high tectonic activity in the marginal areas of the Congolese Craton \cite{cornacchia1989existence}. Further, the arc-related ultramafic origin of the bulk rocks caused by complex tectonic activity in the past, is also proved by \cite{Tanko} who reported on the geochemistry and petrogenesis of ultramafic rocks in the Precambrian terrane of the northern CAR. They indicated the presence of olivine and pyroxene, magnesio-hornblende and magnetite in the the West Zair Precambrian Belt (Figure \ref{fig02}) pointing at intense Precambrian mafic magmatism processes in the past. The magnesian intrusive of Paleoproterozoic age is also found in the Tamkoro-Bossangoa Massif in the north-west intruded into a strike-slip shear zone. They are composed by the gneisses with grained quartz diorites and biotite granites \cite{jgg2014243}.
 
-The deposits of the Bangui basin in the southern region of CAR are dominated by granodiorites which belong to the foreland of the Pan-African Oubanguides belt in the stratum deposited during the Proterozoic period of the Precambrian (pCm) \cite{POIDEVIN1986581}. The metamorphic rocks of the Bossangoa-Bossembélé area in the north of the country consist of the sedimentary and igneous units which are indicative of granulite facies conditions deposited on an old Paleoproterozoic continental crust \cite{Tankoetal2021,Gerard}. 
+The deposits of the Bangui basin in the southern region of CAR are dominated by granodiorites which belong to the foreland of the Pan-African Oubanguides belt in the stratum deposited during the Proterozoic period of the Precambrian (pCm) \cite{POIDEVIN1986581}. The metamorphic rocks of the Bossangoa-Bossembélé area in the north of the country consist of the sedimentary and igneous units which are indicative of granulite facies conditions deposited on an old Paleoproterozoic continental crust \cite{Tankoetal2021,Gerard}. The Precambrian carbonate platforms are widely distributed in CAR as remain the evidence of the paleoenvironment. For instance, these include the carbonate deposits is the Ombella-M'poko Formation consisted of metamorphosed carbonate facies (calcite, dolomite and quartz) on top of the fluvioglacial sediments covered by siliciclastics \cite{TOYAMA2019108}. Later examples of the palaeogeographic formations include the Carnot Formation \cite{CENSIER199947} presented by clastic material formed before the end of the Cretaceous. Active tectonic activity and volcanic eruptions during Cretaceous resulted in typical morphological bodies of the intrusives igneous rocks -- dykes and sills \cite{LOULE201388}.
 
 \begin{figure}[H]
 	\includegraphics[width=14.0 cm]{Fig_02.jpg}
@@ -161,6 +161,8 @@ The Paleozoic (Pz) period is notable for the emergence and geomorphic erosion in
 	\caption{Geologic units and lithology in CAR. Software: QGIS. Data: USGS. Cartography source: authors.
 	\label{fig03}}
 \end{figure}
+
+Geological development with favourable environmental setting of the country situated in the equatorial and subequatorial climate resulted in diverse natural resources of the country. The geomorphology of most of CAR is presented by flat or hilly plateau with dominated savannah an dense ombrophile forest in the the southern regions of the country \cite{Suchel} and the extreme northeast regions of CAR are a steppe. The northern region of the country near the Bamingui  and Bangoran rivers is presented by the sahel-tropical forest \cite{Spinage1988}. The distribution of crops and agriculture activities correspond to the types soils within various regions of the country  that are largely controlled bh the geologic basement \cite{Villien1988,Quantin1965}. For instance, the organic matter in soil is controlled by the underlying geology as determining its chemical and physical nature and, as a result, the extent and types of habitats and vegetation patterns \cite{CombeauQuantin,Quantin1962}. 
 
 %----------- section ----------->
 \section{Materials and Methods}
@@ -330,9 +332,10 @@ gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
 gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"WDMAM for CAR" \
     --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
 # plot coherency ----------------->
-gmt psxy -R3/100/0/1 -JX14.0cl/3.5c -Bxg3f1a2+u" mGal" \
-    -Byafg0.2+l"Coherency@+2@+" \
-    -BWSnE+t"Coherency between vertical gradient and free-air gravity anomaly" \
+gmt psxy -R3/100/0/1 -JX14.0cl/3.5c -Bx2g3+u"mGal" -Byaf0.04g0.2+l"Coherency@+2@+" \
+    -BWSnE+t"Coherency between vertical gradient and free-air gravity anomaly"+gazure \
+    --MAP_GRID_PEN_PRIMARY=thinnest,dimgray \
+    --MAP_GRID_PEN_SECONDARY=thinner,dimgray \
     -X-7.5cm -Y6.0c cross_spectra.txt -i0,15 -W0.1p -O -K >> $ps
 gmt psxy -R -J cross_spectra.txt -i0,15,16 -Sc0.15c -Gred -W0.25p -Ey -O -K >> $ps
 gmt logo -Dx7.5c/-2.0c+o-2.0c/-17.5c+w2c -O >> $ps
@@ -404,7 +407,7 @@ Figure \ref{fig09} shows a detailed view of the anomaly derived from the 2-arc m
 	\label{fig09}}
 \end{figure}
 
-Figure \ref{fig10} demonstrate the coherency between the geophysical data, hypsometry and the Bangui magnetic anomaly fields. Thus, the gravity data with -120 mGal Bouguer anomaly, the associated negative depressions in the geoid derived from the EGM2008 and the ETOPO1-based topographic hypsometry over CAR all correlate with the negative values of the Bangui magnetic anomaly that are below -1000 nT.
+Figure \ref{fig10} demonstrate the coherency between the geophysical data, hypsometry and the Bangui magnetic anomaly fields. Thus, the gravity data with -120 mGal Bouguer anomaly, the associated negative depressions in the geoid derived from the EGM2008 and the ETOPO1-based topographic hypsometry over CAR all correlate with the negative values of the Bangui magnetic anomaly  that are below -1000 nT. At the same time, the comparison of the extent of Bangui magnetic anomaly (Figures \ref{fig08} and {fig09} with enlarged view), the composed plot showing the coherency with geophysical data and the geologic maps of CAR (Figures \ref{fig03} and \ref{fig04}) demonstrates the predominant distribution of the Precambrian (pCm) rocks in this critical region that are exposed just under the central area of the magnetic anomaly and depressions in gravity. 
 
 \begin{figure}[H]
 \centering
