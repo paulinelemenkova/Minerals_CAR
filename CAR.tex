@@ -53,7 +53,7 @@
     emphstyle=\color{deepred},
     numberstyle=\tiny\color{deepmagenta},
     stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
+    basicstyle=\ttfamily\small,
     breakatwhitespace=false,         
     breaklines=true,                 
     captionpos=b,                    
@@ -219,6 +219,9 @@ gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
 
 %----------- subsection ----------->
 \subsection{Geoid}
+The first processing step consisted of converting the ADF file into the GDR by 'grdconvert' using tile to the extent of CAR applied to the area of n00e00 in the global gravity data (Listing \ref{lst02}). Afterwards, the extent of data range was evaluated for the image using 'gdalinfo' module and the cpt was adjusted accordingly using the 'makecpt' module. Extracting the image was done using the 'grdimage' module with extensions applied to the actual extent of the country (-R14/28/2/11.5), that is, considering a EGM2008 clipped and extended over an area between 14°-28°N of parallels and 2°-11.5°E of meridian. 
+
+All the isolines were added on the image and interpolated with a 0.5 m step and annotations every 1 m to visuallise the trends in variations of values. To obtain the cartographic grid, ticks and annotations of graticule, the 'psbasemap' module was used with relevant parameters adjusted by flags, as shown in Listing \ref{lst02}. Auxiliary elements were added using the 'pscoast' and 'pstext' modules for map to be completed. The GMT script written for plotting geoid and shown in Listing \ref{lst02} was used as the basis for plotting the maps of topography and vertical gravity gradient in CAR with adjusted elements in codes and changed datasets processed in scripts, accordingly.
 
 \begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
 exec bash
@@ -226,7 +229,7 @@ gmt grdconvert n00e00/w001001.adf geoid_CF.grd
 gdalinfo geoid_CF.grd -stats
 gmt makecpt -Cjet.cpt -T-18/18 > colors.cpt
 ps=Geoid_CF.ps
-gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2.5/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
+gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
 gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
 gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
     --FORMAT_GEO_MAP=ddd:mm:ssF \
@@ -352,6 +355,8 @@ rm -f cross.txt *_tmp.nc ?.cpt bbox
 %\pagebreak
 \section{Results}
 
+The target achievements made in this study include mapping the correlation between of the geologic structure in the region of CAR, the estimation of gravity contrasts and geoid variations, the coherence between the vertical gradient and vertical gravity anomalies and the visualisation of the extent of the magnetic anomalies in correspondence with the lithosphere structure of CAR according to the datasets on geologic provinces and units. The coherency between the geologic structure of CAR and geophysical datasets was determined by means of the different datasets using different modules of GMT to assess the regions crossed by the Bangui magnetic anomaly. The results demonstrated that the gravity structures and hypsometry associated with the Bangui magnetic anomaly are strongly linked with the extent of the major geologic units and tectonic structures including Central African Orogenic Belt and the northern part of the Congo Craton. 
+
 The analysis of the topographic grid reveals a local depression in the equalised raster grids which corresponds to the geoid and gravity data in the central region of CAR. Further, the data are contrasted in the equalised and quadratic models (Figure \ref{fig04}, b) and d)) compared to the original and normalised grids (Figure \ref{fig04}, a) and c)), where topographic derivatives reveal a saddle-shaped structure in the 1-min topographic ETOPO raster in the region of the magnetic anomaly. This proves the earlier results reporting the ring-shaped formation around the region of magnetic anomaly that has an outer ring diameter of over 810 km and an inner ring diameter at 490 km \cite{GIRDLER199245}. 
 
 \begin{figure}[H]
@@ -432,7 +437,7 @@ Detecting the patterns in the lithospheric structure using the integrated mappin
 
 Thus, by utilizing the ’grdhisteq’ module of GMT that models the data values and divides a grid file into equal patches, we performed a histogram equalisation of the topographic ETOPO1 image covering CAR with four cases of relief modelling with the topography divided into the equal-area segments for approximation of the regional topography using equalised, normalized, quadratic and original models. As a result, using Gaussian approximation ,the smooth distribution of the topographic values was demonstrated with notable peaks and depressions in the elevation of CAR that are comparable with geophysical and magnetic grids. The  ’grdfft’ module that couples different grids and performs computation on grids in the frequency domain using Fast Fourier Transform (FFT), the coherency between vertical gradient and free-air gravity anomaly was plotted and visualised along with grids on magnetic, topographic and gravity data. 
 
-We have tested our proposed techniques in the context of the geologic-geophysical setting of CAR where extreme magnetic anomaly is presented in the Bangui area. Overall, seven datasets are processed, visualised, evaluated and analysed: geoid EGM2008, IGPP, GEBOC/SRTM, ETOPO1, EMAG2, WDMAM and USGS geologic datasets. As future work we plan three directions. First, to integrate other datasets to increase of our current dataset selection over central African region. Second, to extend the current methods of cartographic scripting by other modules of GMT. Third, to develop target study area in neighbouring regions of Africa to extend the applications of the proposed cartographic scripting methods. The obtained results shown in the maps demonstrated that the gravity contrasts related to the magnetic anomaly are strongly linked with the tectonic structures and geologic data on CAR. 
+We have tested our proposed techniques in the context of the geologic-geophysical setting of CAR where extreme magnetic anomaly is presented in the Bangui area. Overall, seven datasets are processed, visualised, evaluated and analysed: geoid EGM2008, IGPP, GEBOC/SRTM, ETOPO1, EMAG2, WDMAM and USGS geologic datasets. As future work we plan three directions. First, to integrate other datasets to increase of our current dataset selection over central African region. Second, to extend the current methods of cartographic scripting by other modules of GMT. Third, to develop target study area in neighbouring regions of Africa to extend the applications of the proposed cartographic scripting methods. Furthermore, the estimated values of the magnetic lowest negative values between the -1000 nT to -280 nT  were compared to the extent of the topographic and geophysical grids to reveal the correlations between the datasets. The obtained results shown in the maps demonstrated that the gravity contrasts related to the magnetic anomaly are strongly linked with the tectonic structures and geologic data on CAR. 
 
 Moreover, in CAR, data related to lithospheric structure and tectonic models along with their effects on geophysical and geomagnetic data are very limited. With this regard, mapping the magnetic and gravity anomalies analysed in the context of the regional geologic and tectonic development of CAR region contributes both to the theoretical investigation on geotectonic and geological setting in this area and to the practical increase of data aimed at mineral exploration in CAR. With respect to practical geologic exploration of natural resources in CAR, mapping the coherency between the Bangui magnetic anomaly, geophysical data and geologic setting for mineral resource distribution contributes to the analysis of Earth's structure and thus has a direct impact on the economic exploration of mineral resources which is of importance in CAR.
 
