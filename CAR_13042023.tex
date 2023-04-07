@@ -1,0 +1,505 @@
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
+
+%=================================================================
+\documentclass[minerals,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+
+%=================================================================
+
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2023}
+\copyrightyear{2023}
+%\externaleditor{Academic Editor: Firstname Lastname}
+\datereceived{22 February 2023} 
+\daterevised{} 
+\dateaccepted{} 
+\datepublished{} 
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{gensymb} % for \textdegree
+\usepackage{tabularx}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepmagenta}{RGB}{195,12,214}
+\definecolor{deepgreen}{RGB}{29,122,30}
+\definecolor{mintgreen}{RGB}{192,249,192}
+\definecolor{codepurple}{RGB}{204, 0, 153}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{GainsboroPurple}{RGB}{247,176,247}
+\definecolor{LightSlateGrey}{RGB}{124,118,118}
+%    
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{LightSlateGrey},
+    keywordstyle=\color{deepgreen}\bfseries,
+    emphstyle=\color{deepred},
+    numberstyle=\tiny\color{deepmagenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Coherence of Bangui magnetic anomaly with topographic and gravity contrasts across Central African Republic }
+
+% Author Orchid ID: enter ID or remove command
+\newcommand{\orcidauthorA}{0000-0002-5759-1089} % Polina Add \orcidA{} behind the author's name
+\newcommand{\orcidauthorB}{0000-0002-6461-1551} % Olivier Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Polina Lemenkova $^{1}$*\orcidA{} and Olivier Debeir $^{1}$\orcidB{}}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Polina Lemenkova and Olivier Debeir}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Lemenkova, P.; Debeir, O.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus du Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, Brussels 1050, Belgium.
+}
+
+% Contact information of the corresponding author
+\corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32 471 86 04 59 (P.L.)}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation 3.} 
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{
+Interactions between geophysical processes and geodynamics of lithosphere play a crucial role in geologic structure of the Earth's crust. The Bangui magnetic anomaly is a notable feature in the lithospheric structure of Central African Republic (CAR) resulted from the complex tectonic evolution. We present a series of maps to obtain the coherence in the geophysical data and magnetic anomaly field from integration of free-air altimetric gravity, magnetic EMAG2 Earth data, geoid EGM2008 model and topographic SRTM/ETOPO1 relief to get insights in the geodynamics of CAR region. Histogram equalization of the topographic grids was performed for partition of raster grid files into equal-area patches of data ranged by segments with relative highs and lows of the relief, and to compare the original data with equalized, normalized and quadratic models. The scripts used for cartographic data processing are presented and commented. The consistency and equalization of topography, gravity and geoid data was based using GMT modules 'grdfft' and 'grdhisteq' modules. On the presented maps, we demonstrated the correlation between the distribution of rocks with high magnetism in the central part of the anomaly, geologic fields of granites, greenstone belts, and metamorphosed basalts as rock exposures, negative Bouguer anomaly (<-80 mGal), low geoid values (< -12 m) and the elongated shape of the magnetic anomaly with extreme negative values ranging within the amplitude of -1000 to -200 nT. The fusion of the multi-source datasets in the reported work provides a new insight into the analyses of crustal thicknesses and the average density of the Earth in CAR, as well as magnitude of the magnetic fields with notable deviations caused by magnetic flux density in Bangui area related to the distribution of mineral resources.}
+
+% Keywords
+\keyword{Programming; geophysics; GMT; mapping; Africa; geology; geodynamics; geomatics; data analysis; cartography} 
+
+\PACS{91.25.Rt; 91.25.-r; 91.10.-v; 91.10.Da; 91.10.Fc; 91.10.Op; 91.25.Cw}
+\MSC{86A30; 86A04; 86A60; 86A99; 86-08; 86-11; 76E20}
+\JEL{Q00; Q01; O13; Q5; Q51; Q55; Q56}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\section{Introduction}
+The Bangui magnetic anomaly is located in the Central African Republic in the West Zair Precambrian Belt (Figure \ref{fig01}). With an amplitude of 28 nT and the area of $700,000 km^2$ \cite{girdler1992possible}, it is the largest in Africa and one of the most important magnetic anomalies on the planet. The anomaly received the name after the capital of the country located at 4°20 N on the right bank of the Oubangui River \cite{Baticle,Villien1990}, a major tributary of Congo River \cite{Vennetier}. Revealed by the satellite magnetometer data and reported in previous studies \cite{Regan,OUABEGO201311,NJITEUTCHOUKEU2021104206}, the anomaly has a crustal origin and is strongly related to the tectonic evolution and Precambrian history of the Saharan metacraton and Congo Craton. Geologically, it is located in the region of deposited highly metamorphosed Precambrian rocks and has a Precambrian basement with large masses of intensely magmatic rocks \cite{Kochemasov} . The formation of the anomaly is related to the lithosphere bending. \cite{NJITEUTCHOUKEU2021104299} reports the thick crust and strong lithosphere beneath the anomaly, as well as high coherence between the Bouguer gravity and relief which correlates with the Moho depths near anomaly.
+
+At the same time, the comparisons of the magnetic contrasts, geologic setting and geophysical data in the Earth's critical zones provide new insights into the formation of the continental margins and distribution of mineral resources. It furthermore enables to perform a better interpretation the effects from the tectonic activity in the past on the geophysical processes in present \cite{FELIXTOTEU2002906}. Thus, regions earlier affected by the geodynamic processes are notable for negative magnetic anomalies, which suggests a strong correlation between the active tectonics and the origin of the magnetic anomalies which is associated with the lithosphere movements \cite{RAVAT199259}. For instance, \cite{ARKANIHAMED1985257} noted that the lithosphere beneath the sedimentary basins formed during the Gondwana break up has a lower geomagnetism compared to the regions under the cratons, which is related to the thermal demagnetisation of the high-temperature asthenosphere. Further, certain effects are noted from the magnetic mineralogy of the ascending magma in the lower crust.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_01.jpg}
+	\caption{Topographic map of Central African Republic. Software: Generic Mapping Tools (GMT) version 6.1.1, \cite{Wessel}. Data source: GEBCO/SRTM \cite{GEBCO,SRTM}. Cartography source: authors.
+	\label{fig01}}
+\end{figure}
+
+Specifically for Central Africa, the magmatism is affected by the continental rifting and related activity of a mantle plume during opening of the Atlantic in Mesozoic \cite{WILSON1992203}. The lithospheric extension and associated ascent of magma resulted in intrusion of tholeitic basalts with typical geochemical and isotopic signatures. The tectonic structure of the CAR is notable for the extent of the Central African Fold Belt extending north-east between Cameroon through CAR towards Sudan and contributed to the tectonic magmatism. The Central African Fold Belt is formed as a result of the  extension of the Congo Craton and associated collisions and subduction of the related crustal blocks in Cameroon and CAR \cite{TOTEU2022296}. The Mesozoic separation of African crustal blocks during the Early Cretaceous resulted in formation of the Western Central African Rift System. As a result, the deposits of petroleum are found in structured reservoirs of fault blocks of the rift basins in CAR \cite{GENIK1992169}.
+
+Anomalies in the lithospheric magnetic field present the data on variation in the intensity of Earth's magnetisation which points at both explicit and hidden geophysical properties. In turn, data on magnetisation reveals the properties of underlying rock, the tectonic history of Earth and help interpreting the key steps in the geologic evolution of the Earth \cite{Vervelidou}. At the same time, our understanding of these processes and the complexity of their interactions using Earth observation data can assist in practical decision making on natural resource management, sustainable environmental development and mineral exploration in CAR. 
+
+In this paper we present a scripting cartographic approach based on Generic Mapping Tools (GMT) that exploits the structural regularities in the geophysical, geologic and topographic datasets on CAR and uses them as input information during the matching procedure. We first extract all the information from the gravity, topography and magnetic grids and map their parameters using several modules of GMT. We then distinguish and handle separately the repeated structures in the topographic grids. This is done using equalisation and comparison of the equalised, quadratic, normalized and original rasters through enhanced  ranges of a grid depending on frequency distribution of elevation amplitude of the relief in various regions of CAR. The images were incorporated independently as separate files and processed by the GMT scripts. 
+
+Moreover, the coherency between the vertical gradient and the distribution of gravity anomalies is compared using the 'grdfft' module of GMT and several plotted map components. We propose using GMT modules that correct match and visualise the repeated structures placed on the images and identified for maps of gravity, geoid, topography, geology and magnetic anomalies in CAR. The main application for such an algorithm is for image pairwise comparison in map pairs where the overlap between the geological and geophysical parameters is comprised mostly of similarities in patterns on the analysed images. Our application of GMT exploits five important characteristics of magnetic, geophysical and topographic grids along with geological data aimed at visualising the repeated structures, depressions and extremities in the geophysical anomalies over CAR.
+
+\section{Regional Geology} 
+
+The geology of CAR is notable by the presence of the two prominent greenstone belts formed during the Archaean Eon as  metamorphosed mafic volcanic sequences within the granite-gneiss volumes \cite{Poidevin1991LesCD}. The greenstone belts are located to the north of Bouca in the West Zair Precambrian Belt (Figure \ref{fig02}) as narrow subparallel bands of the extrusive igneous rocks (basalts and andesites) placed on a sialitic basement \cite{Boulvert1983}. The first one is a 250-km long Bandas belt composed of volcanic and metasedimentary rocks \cite{POIDEVIN1981157} and the second is located in the west -- a 150-km long Bogoin-Boali belt with anomalously high gold deposites \cite{Dostal}. They further include the tholeiitic basalts, dolerites from the Proterozoic dyke swarms and sills and andesites formed during crystallization of the basaltic magma \cite{Poidevin1985}. 
+
+The geochemistry of the greenstone belts also includes the metamorphic minerals of the greenschist facies, pyroxenes and olivines \cite{POIDEVIN199497}. The presence of back-arc tholeiites and arc-related greywackes argues for a compressive margin plate boundary for the greenstone belts pointing at high tectonic activity in the marginal areas of the Congolese Craton \cite{cornacchia1989existence}. Further, the arc-related ultramafic origin of the bulk rocks caused by complex tectonic activity in the past, is also proved by \cite{Tanko} who reported on the geochemistry and petrogenesis of ultramafic rocks in the Precambrian terrane of the northern CAR. They indicated the presence of olivine and pyroxene, magnesio-hornblende and magnetite in the the West Zair Precambrian Belt (Figure \ref{fig02}) pointing at intense Precambrian mafic magmatism processes in the past. The magnesian intrusive of Paleoproterozoic age is also found in the Tamkoro-Bossangoa Massif in the north-west intruded into a strike-slip shear zone. They are composed by the gneisses with grained quartz diorites and biotite granites \cite{jgg2014243}.
+
+The deposits of the Bangui basin in the southern region of CAR are dominated by granodiorites which belong to the foreland of the Pan-African Oubanguides belt in the stratum deposited during the Proterozoic period of the Precambrian (pCm) \cite{POIDEVIN1986581}. The metamorphic rocks of the Bossangoa-Bossembélé area in the north of the country consist of the sedimentary and igneous units which are indicative of granulite facies conditions deposited on an old Paleoproterozoic continental crust \cite{Tankoetal2021,Gerard}. The Precambrian carbonate platforms are widely distributed in CAR as remain the evidence of the paleoenvironment. For instance, these include the carbonate deposits is the Ombella-M'poko Formation consisted of metamorphosed carbonate facies (calcite, dolomite and quartz) on top of the fluvioglacial sediments covered by siliciclastics \cite{TOYAMA2019108}. Later examples of the palaeogeographic formations include the Carnot -- a Mesozoic fluvio-lacustrine detrital formation located in the western part of CAR and presented by clastic material formed before the end of the Cretaceous \cite{CENSIER199947}. More details on alluvial deposits of Carnot sandstones is given by \cite{CENSIER1990385}. Active tectonic activity and volcanic eruptions during Cretaceous resulted in typical morphological bodies of the intrusives igneous rocks -- dykes and sills \cite{LOULE201388}.
+
+\begin{figure}[H]
+	\includegraphics[width=14.0 cm]{Fig_02.jpg}
+	\caption{Geologic provinces in CAR. Software: QGIS. Data source: USGS. Cartography source: authors.
+	\label{fig02}}
+\end{figure}
+
+Regional stratigraphy of CAR is illustrated in Figure \ref{fig03}. The stratigraphic succession is presented by the oldest rocks from the Precambrian (Pc) and following Paleozoic (Pz) periods; the Mesozoic successions comprised by rocks from the Cretaceous (K) and Lower Cretaceous (Kl) periods; Cenozoic (QT) successions comprised of rocks  from the Pleistocene (Qp), Holocene (Qe), Quaternary (Q) and Tertiary (T) periods. The Precambrian (pCm) metamorphic formation is most exposed  with dominating quartzite-schistose and upper quartzite (Bangui and Nola) series. The granitic bodies and associated gneisses of Lower Proterozoic age of Precambrian period intruding the upper series were tectonized during the period of orogeny and form the basement in the south-central CAR \cite{LAVREAU199069}. The greenstone belt of pCm, covered by a series of conglomerates, is distributed on a granitized gneiss basement and includes volcanites and schists \cite{CORNACCHIA1989221}. 
+
+The southern region of CAR lithology continues the northern border of the Congo Craton and is presented by the Lower Cretacious (Kl) and Precambrian (pCm) successions (Figure \ref{fig03}). It is mostly composed of tholeitic basalts and gabbros of mafic and ultramafic rocks corresponding to the oceanic basalts and gabbros associated to iron-rich sediments and gneisses \cite{TOPIEN2023104793}. The Lower Cretaceous (Kl) succession, the second widely distributed in CAR, includes the fluvio-lacustrine deposits on the Central African shield \cite{Boulvert1983}. Further, the interfluves of the dense fluvial network of rivers in CAR correspond to the series of plateaus with the presence of the polymorphic sandstones Tertiary (T) with the valleys composed of soft sandstone and argillites of Cretaceous (K) \cite{Mestraudetal1964}. Further, the Bangui region is characterised by the Plutonic massifs distributed in the Ngouaka-Gbago area which includes the gabbro, granodiorite, and granites experienced the processes of the greenschist facies metamorphism \cite{VONTO2020103831}.
+
+\begin{figure}[H]
+	\includegraphics[width=14.0 cm]{Fig_03.jpg}
+	\caption{Geologic units and lithology in CAR. Software: QGIS. Data: USGS. Cartography source: authors.
+	\label{fig03}}
+\end{figure}
+
+The Paleozoic (Pz) period is notable for the emergence and geomorphic erosion in the earlier reliefs which resulted in the upper hilly surface of argillites in the northern regions of CAR \cite{Boulvert1995}. The basin of the Aouk river and its tributaries, forming a natural border between CAR and Chad is presented by the alluvium and colluvium from the Pleistocene (Qp) valleys with modern sediments of Holocene (Qe), Figure \ref{fig03}. The formations in the alluvial deposits also include notable intrusions of diamonds formed as a result of the ascent of the upper mantle and related magmatic processes during the geological history of CAR \cite{Censieretal1998,Censier,MALPELI2014249,berthoumieux1957mission}. The extensive diamond deposits are mostly distributed in the south-western region and north-easter regions of the country in the the Carnot and Mouka-Ouadda Sandstone formations \cite{MALPELI2014249,USGSreport}.
+
+Rich mineral resources of CAR can be illustrated by the alluvial diamonds in the eastern and western regions \cite{USGSreportFR2013} and gold mining fields in the quartz veins in greenschist facies of the Paleoproterozoic formations \cite{KPEOU2020103825}. The geological development with favourable environmental setting of the country situated in the equatorial, humid tropical and subequatorial climate resulted in diverse natural resources of the country. The geomorphology of most of CAR is presented by flat or hilly plateau with dominated savannah \cite{Nguimalet} and dense ombrophile forest in the the southern regions of the country \cite{Suchel} and the extreme northeast regions of CAR are a steppe. The northern region of the country near the Bamingui  and Bangoran rivers is presented by the sahel-tropical forest \cite{Spinage1988}. The distribution of crops and agriculture activities correspond to the types soils within various regions of the country that are largely controlled by the geologic basement \cite{Villien1988,Quantin1965,Prioul}. For instance, the organic matter in soil is controlled by the underlying geology as determining its chemical and physical nature and, as a result, the extent and types of habitats and vegetation patterns \cite{CombeauQuantin,Quantin1962}. Further, carbonated bed formations favour the development of the karsts with typical relief and limestone soils in the south of the country in the Oubangui basin \cite{Salomon}.
+
+%----------- section ----------->
+\section{Materials and Methods}
+This study is based on the several gravity and geologic databases: two gravity databases (EMAG2 and WDMAM), satellite-derived gravity data (EGM2008) and topography data (GEBCO/SRTM, ETOPO1 and IGPP). The geologic maps were built upon the USGS data using QGIS software version 3.22.1, while the other datasets were processed separately by the GMT scripts by codes presented below. The programming approaches with codes used for mapping have emerged as powerful alternatives to the traditional cartography based on using GIS (e.g., \cite{TRAORE2020103933,RUNGE2005311,TRAORE2021100114}). They operate with scripts whose lines of code can either be used as a sequence for lines and include diverse modules used for plotting various cartographic elements on the maps \cite{4814952,Lemenkova202230,8588718,Lemenkova202301,Lemenkova202228}, or as instruments in remote sensing data processing \cite{9964623,Lemenkova202229,7577632,Lemenkova202227}
+
+%----------- subsection ----------->
+\subsection{Histogram equalisation}
+
+The equalisation of the topographic grids was determined by means of the 'grdhisteq' module of the GMT by four different approaches in modelling elevation data: original, equalised, quadratic and normalised. A sequence of different GMT auxiliary modules was used to plot the map: 'pscoast', 'makecpt', 'grdimage', 'psscale' and annotations added by a combination of 'echo' and 'pstext'. The parameters of the commands are defined for fine cartographic adjustments and presented as a full code in Listing \ref{lst01}. The comparison of the processed topographic grids regularised the non-linear models in hypsometry to evaluate the extremities in the data covering the regions and highlight the depressions and peaks in the elevation models.
+
+\begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids,style=mystyle,label={lst01}]
+exec bash
+gmt grdcut ETOPO1_Ice_g_gmt4.grd -R14/28/2/11.5 -Gcf1_relief.nc
+ps=HistCAR.ps
+gmt makecpt -Crainbow -V -T212/1820 > t.cpt
+gmt makecpt -Crainbow -T0/15/1 > c.cpt
+# 1 upper left plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -C16
+gmt grdimage cf1_relief.nc -I+a45+nt1 -Ct.cpt -JM3i -Y6i -K -P \
+    -Bpxg4f1a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe > $ps
+echo "24 10 Original" | gmt pstext -Rcf1_relief.nc -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+# 2 upper right plot
+gmt grdimage out.nc -Cc.cpt -J -X3.5i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+echo "24 10 Equalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt psscale -Dx0i/-0.4i+jTC+w5i/0.15i+h+e+n -O -K -Ct.cpt -Bg200f10a200 -By+lm >> $ps
+# 3 low left plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -N
+gmt makecpt -Crainbow -T-3/3 > c.cpt
+gmt grdimage out.nc -Cc.cpt -J -X-3.5i -Y-3.0i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt grdcontour cf1_relief.nc -R -J -C200 -A500+f7p,26,blue -Wthinnest,blue -O -K >> $ps
+echo "23.5 10 Normalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T \
+    -UBL/-5p/-4.0c -Gwhite@10 -Dj0.1i >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+# 4 low right plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -Q
+gmt makecpt -Crainbow -T0/15 > q.cpt
+gmt grdimage out.nc -Cq.cpt -J -X3.5i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+echo "24 10 Quadratic" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt psscale -Dx0i/-0.4i+w5i/0.15i+h+jTC+e+n -O -K -Cc.cpt -Bg0.5f0.1a1 -By+l"z@-n@-" >> $ps
+gmt psscale -Dx0i/-1.0i+w5i/0.15i+h+jTC+e+n -O -K -Cq.cpt -Bg0.5f0.2a1 -By+l"z@-q@-" >> $ps
+gmt logo -Dx0.0/-4.5c+o-1.0c/0.2c+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X-8.0 -Y6.5c -N -O \
+-F+f14p,Palatino-Roman,black+jLB >> $ps << EOF
+0.0 11.5 Central African Republic: histogram equalization of topographic grid:
+1.5 10.7 ETOPO1 DEM Global Relief Model 1 arc min resolution
+EOF
+gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
+\end{lstlisting}
+
+%----------- subsection ----------->
+\subsection{Geoid}
+The first processing step consisted of converting the ADF file into the GDR by 'grdconvert' using tile to the extent of CAR applied to the area of n00e00 in the global gravity data (Listing \ref{lst02}). Afterwards, the extent of data range was evaluated for the image using 'gdalinfo' module and the cpt was adjusted accordingly using the 'makecpt' module. Extracting the image was done using the 'grdimage' module with extensions applied to the actual extent of the country (-R14/28/2/11.5), that is, considering a EGM2008 clipped and extended over an area between 14°-28°N of parallels and 2°-11.5°E of meridian. 
+
+All the isolines were added on the image and interpolated with a 0.5 m step and annotations every 1 m to visuallise the trends in variations of values. To obtain the cartographic grid, ticks and annotations of graticule, the 'psbasemap' module was used with relevant parameters adjusted by flags, as shown in Listing \ref{lst02}. Auxiliary elements were added using the 'pscoast' and 'pstext' modules for map to be completed. The GMT script written for plotting geoid and shown in Listing \ref{lst02} was used as the basis for plotting the maps of topography and vertical gravity gradient in CAR with adjusted elements in codes and changed datasets processed in scripts, accordingly.
+
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
+exec bash
+gmt grdconvert n00e00/w001001.adf geoid_CF.grd
+gdalinfo geoid_CF.grd -stats
+gmt makecpt -Cjet.cpt -T-18/18 > colors.cpt
+ps=Geoid_CF.ps
+gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
+gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    --MAP_GRID_CROSS_SIZE_PRIMARY=0.8c \
+    --MAP_GRID_CROSS_SIZE_SECONDARY=0.5c \
+    -Bpx1f1a1 -Bpyg1f1a1 -Bsxg1 -Bsyg1 \
+    -B+t"Earth geoid model on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg2f0.2a4+l"Color scale 'jet': dark to light blue, white, yellow and red [C=RGB], -T-18/18]" \
+    -I0.2 -By+lm -O -K >> $ps
+gmt psbasemap -R -J -Tmg26/3.6+w3.0c+d1.63+t45/10/5+ithin,lightgoldenrod+p0.1p,gold+l+jCM -O -K >> $ps
+gmt psbasemap -R -J -Lx14.5c/-2.3c+c50+w300k+l"Mercator projection. Scale (km)"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thick,white -Wthick,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.1c -Y4.5c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+3.0 10.4 Earth geoid image EGM2008 vertical datum 2.5 min resolution
+EOF
+gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
+\end{lstlisting}
+
+%----------- subsection ----------->
+\subsection{IGPP Earth Free-Air Anomaly}
+Gravity data were extracted from the EGM2008 database with global coverage resulting from the spherical harmonic models of the Earth's gravitational potential by \cite{Pavlis}. Diverse data processing algorithms were applied using GMT modules as shown below in Listing \ref{lst03}. The raster image was visualised using the 'grdimage' modules with isolines added as contours with 20 m interval by the 'grdcontour' module. The 'Haxby' colour palette was applied, specially designed for gravity grids and visualising the geophysical data. The colour palette was adjusted according to the amplitude and geometry of the observed values in the raster grids, which were checked using the 'gdalinfo' module. The rest of the cartographic elements was added using the sequence of modules GMT such as 'psbasemap', 'pscoast', 'pstext' and more, as shown in Listing \ref{lst03}.
+
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst03}]
+exec bash
+gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
+gdalinfo grav_CF.grd -stats
+gmt makecpt -Chaxby.cpt -T-85/80 > colors.cpt
+ps=Grav_CF.ps
+gmt grdimage grav_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.0i -P -I+a15+ne0.75 -Xc -K > $ps
+gmt grdcontour grav_CF.grd -R -J -C20 -A40 -Wthinner -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    -Bpx4f2a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 \
+    -B+t"Free-air gravity anomaly on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1+w15.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg20f1a10+l"Color scale 'haxby' Bill Haxby's color scheme for geoid & gravity [C=RGB] -T-200/200]" \
+    -I0.2 -By+l"mGal" -O -K >> $ps
+gmt psbasemap -R -J -Tdg15/10.5+w1.5c+f3+l -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thickest,deeppink1 -Wthin,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.5c -Y5.0c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+2.3 9.2 IGPP Global Earth Free-Air Anomaly, 0.025 mGal resolution
+EOF
+gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
+\end{lstlisting}
+
+\subsection{Coherency of geophysical grids}
+
+The comparison of several maps allow the analysis of the correspondence of the crustal structure in the CAR region, the estimation of topographic heights and hypsometry and coherency in gravity and vertical gravity gradient. Such data integration allows better understanding of the geophysical and topographic responses on the inner behaviour of the lithosphere and tectonic structure of CAR region, and their correspondence with magnetic contrasts. The analyses of the coherency used for plotting the graph was performed using the GMT module 'grdfft' which process the data using the Fast Fourier Transform, estimates the cross-spectral for the co-registered gravity grids (mGal), and reports the result as functions of the symmetry reflection between the both grids. To this end, the data were compiled and processed using the code in Listing \ref{lst04}. 
+
+\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
+# Extract subsets of img/grd files in geographic format ----------------->
+gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
+gmt grdconvert n00e00/w001001.adf geoid_CF.grd
+gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
+gmt img2grd curv_27.1.img -R14/28/2/11.5 -Ggravvert_CF.grd -T1 -I1 -E -S0.1 -V
+gmt grdcut EMAG2_V2.grd -R14/28/2/11.5 -Gcf_mag.nc
+gmt grdcut @earth_wdmam_03m -R14/28/2/11.5 -Gcf_mag_wdmam.nc
+gmt grdfft cf_mag_wdmam.nc cf_relief.nc -E+wk+n -Na+d+wtmp > cross_spectra1.txt
+gmt set FONT_TITLE 12p GMT_FFT kiss
+# make cpt for rasters ----------------->
+gmt makecpt -Cturbo -T212/1820 > z.cpt # topo
+gmt makecpt -Crainbow -T-18/18 > g.cpt # geoid
+gmt makecpt -Cjet.cpt -T-40/40 > c.cpt # grav
+gmt makecpt -Chaxby.cpt -T-85/80 > d.cpt # vert grav
+gmt makecpt -Cwysiwyg.cpt -T-1000/512 > m.cpt # EMAG2
+gmt makecpt -Cmag -T-933/375 > n.cpt # WDMAM
+ps=Coherency_CF.ps
+# map 1 lower left ----------------->
+gmt grdimage cf_relief.nc -R14/28/2/11.5 \
+    -I+a0+nt1 -JM6.0c -Cz.cpt -P -K -X1.474i -Y1i > $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c \
+    -Ba -BWSne+t"IGPP Global Earth Relief"  -UBL/-5p/-40p \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 2 lower right ----------------->
+gmt grdimage geoid_CF.grd -R14/28/2/11.5 \
+    -I+a0+nt1 -JM6.0c -Cg.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c \
+    --MAP_TITLE_OFFSET=0.1c -Ba -BWSne+t"Geoid model EGM2008" -O -K  >> $ps
+# map 3 upper left ----------------->
+gmt grdimage gravvert_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
+    -Cc.cpt -O -K -X-7.5c -Y6.0c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba \
+    -BWSne+t"Vertical gravity gradient" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 4 upper right ----------------->
+gmt grdimage grav_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cd.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"Free-air gravity anomaly" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 5 upper left EMAG2 ----------------->
+gmt grdimage cf_mag.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
+    -Cm.cpt -O -K -X-7.5c -Y6.0c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"EMAG2 for CAR" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# Bangui magnetic anomaly
+gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
+# map 6 upper right ----------------->
+gmt grdimage cf_mag_wdmam.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cn.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"WDMAM for CAR" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# plot coherency ----------------->
+gmt psxy -R3/100/0/1 -JX14.0cl/3.5c -Bx2g3+u"mGal" -Byaf0.04g0.2+l"Coherency@+2@+" \
+    -BWSnE+t"Coherency between vertical gradient and free-air gravity anomaly"+gazure \
+    --MAP_GRID_PEN_PRIMARY=thinnest,dimgray \
+    --MAP_GRID_PEN_SECONDARY=thinner,dimgray \
+    -X-7.5cm -Y6.0c cross_spectra.txt -i0,15 -W0.1p -O -K >> $ps
+gmt psxy -R -J cross_spectra.txt -i0,15,16 -Sc0.15c -Gred -W0.25p -Ey -O -K >> $ps
+gmt logo -Dx7.5c/-2.0c+o-2.0c/-17.5c+w2c -O >> $ps
+# Convert to image file by GhostScript
+gmt psconvert Coherency_CF.ps -A1.0c -E720 -Tj -Z
+# Unix remove files 
+rm -f cross.txt *_tmp.nc ?.cpt bbox
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagebreak
+\section{Results}
+
+The target achievements made in this study include mapping the correlation between of the geologic structure in the region of CAR, the estimation of gravity contrasts and geoid variations, the coherence between the vertical gradient and vertical gravity anomalies and the visualisation of the extent of the magnetic anomalies in correspondence with the lithosphere structure of CAR according to the datasets on geologic provinces and units. The coherency between the geologic structure of CAR and geophysical datasets was determined by means of the different datasets using different modules of GMT to assess the regions crossed by the Bangui magnetic anomaly. The results demonstrated that the gravity structures and hypsometry associated with the Bangui magnetic anomaly are strongly linked with the extent of the major geologic units and tectonic structures including Central African Orogenic Belt and the northern part of the Congo Craton. 
+
+The analysis of the topographic grid reveals a local depression in the equalised raster grids which corresponds to the geoid and gravity data in the central region of CAR. Further, the data are contrasted in the equalised and quadratic models (Figure \ref{fig04}, b) and d)) compared to the original and normalised grids (Figure \ref{fig04}, a) and c)), where topographic derivatives reveal a saddle-shaped structure in the 1-min topographic ETOPO raster in the region of the magnetic anomaly. This proves the earlier results reporting the ring-shaped formation around the region of magnetic anomaly that has an outer ring diameter of over 810 km and an inner ring diameter at 490 km \cite{GIRDLER199245}. 
+
+\begin{figure}[H]
+\makebox[1.0\linewidth][r]{%
+%\centering
+	\includegraphics[width=17.0 cm]{Fig_04.jpg}
+}
+	\caption{Histogram equalisation of the topography grids on CAR based on the ETOPO1 raster data. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: ETOPO1. Cartography source: authors.
+	\label{fig04}}
+\end{figure}
+
+The geoid grid was mapped and compared with the magnetic anomaly in Bangui area (Figure \ref{fig05}) to show the coherency with structural variations in the crust reflected in gravity values of geoid. Thus, the distribution of the magnetic contrasts continue up to a depth of 160 km where crustal thickness is about 40 km \cite{DORBATH1985231}, indicating a close relation between the Bangui magnetic anomaly and of the geoid and geophysical data that result in similar patterns contrast due to the Panafrican orogenic events \cite{MOLOTOAKENGUEMBA2008214}. Since the Bangui magnetic anomaly continues within the Central African Orogenic Belt which is a subject of the cumulative effects from multiple tectonic events during the geological development in Precambrian and later periods, it has a thin lithosphere structure beneath the magnetic anomaly that well correlates with gravity data \cite{GOUSSINGALAMO2018326}. 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_05.jpg}
+	\caption{Earth geoid map of Central African Republic. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{Pavlis}. Magnetic declination (magnetic rose in lower right corner) is given for Votofo, CAR: +1.63° (east, positive). Cartography source: authors.
+	\label{fig05}}
+\end{figure}
+
+In turn, gravity anomalies that are reflected in lower geoid values correspond to a thinner lithospheric thickness and Moho depths associated with the isostatic surface topography of the region \cite{Stunff}. Thus, beneath the magnetic anomaly, the geoid in CAR has values from -4 to -8 m, which is lower than the western region where values above 16 m are recorded. Moreover, the change in geoid elevation over elevations compared to the topographic depressions is related to plate tectonics the processes of cooling lithosphere, thermal conductivity and mantle mineralogy \cite{HAGER198397}. Thus, the geoid height are sensitive to the distribution of density in the Earth's mantle which explains the variations in the values with higher values in the south-western region of CAR and negative values in the eastern regions (Figure \ref{fig05}). Further, the contrasts of the geoid are influenced by the distribution of deep-mantle anomalies in the ithospheric heterogeneities \cite{HagerClayton} and subducted slabs which poses constraints in density material and reflected in the surface variations in geoid \cite{RICHARDS2023117964}.
+
+Gravity anomalies and amplitude contrasts (Figure \ref{fig06}) result from the lower lithospheric depth and crustal density which correspond to the tectonic plate movements and associated heterogeneities in mantle density \cite{Boukeke}. As a result, similar gravity pattern at the surface closely follow the tectonic structure in the Central African Orogenic Belt due to active mantle flow and thermal convection \cite{Daly}. The analysis of the Figure \ref{fig06} corresponds to the earlier maps \cite{Albouy} and reveal the negative values from -80 to -60 mGal over the study area (Figure \ref{fig06}. In contrast, higher values over +50 mGal are clearly visible in the western and southwestern regions of CAR that correspond to the regional outcrops of the Lower Cretaceous rocks (Figure \ref{fig03}) in the Zaire geologic province (Figure \ref{fig02}).
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_06.jpg}
+	\caption{IGPP Earth Free-Air Anomaly on Central African Republic. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{SANDWELL20211059}. Cartography source: authors.
+	\label{fig06}}
+\end{figure}
+
+The geologic structure in this region includes the Paleozoic glacial clastic sedimentary formations include, among others, tillites, argillites and mudstones which crop out from several sedimentary formations \cite{MILESI2006571}. A close investigation of Figures \ref{fig06} and \ref{fig07} and a comparison with data on magnetic anomaly shows that a negative Bouguer anomaly of about -40 mGals (blue colours in Figure \ref{fig06} and dark blue areas in Figure \ref{fig07}) coincides with the distribution of the magnetic anomaly, which implies the sources of this coherence in the upper mantle. Further, the variations in vertical gravity intensity observed in Figure \ref{fig07} points at the difference in lithospheric mass anomalies caused by deeper density contrasts. 
+
+Since the surface topography is related to the geologic-tectonic processes related to the deep-mantle convection, it is also associated with seismic anomalies in the dense mantle \cite{Chevrot}. In turn, seismic velocity anomalies are proportional to the heterogeneities in mantle density related to the tectonic activities \cite{Forte}. Therefore, the observed geoid heights over cratons differ in gravity values than in the region of the anomaly and related Central African Orogenic Belt. For instance, major structural elements in the Bossangoa and Bossembele areas in the north-west reflect the tectonic evolution of the basement of the North Equatorial fold belt include the shear zones, lineations and fold axes \cite{Mapoka} that affect the shape of the geoid and topography in the modern relief of CAR. As a result, the gravity values, affected by the crustal density and continental Iithospheric thickness, are reflected in the topography and the geoid patterns of CAR. 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_07.jpg}
+	\caption{Derivative of the IGPP Earth’s gravity field on Central African Republic: vertical gravity gradient. Software: GMT v. 6.1.1, \cite{Wessel}. Data source: EGM2008 Global Earth Geoid \cite{SANDWELL20211059}. Cartography source: authors.
+	\label{fig07}}
+\end{figure}
+
+The distribution of the bipolar magnetic anomaly which has the major portion of values negative over the two third of CAR in central and south-west regions of the country showed a distinct large negative depression with values greater than 1000 nT and surrounding peaks which well corresponds with previous records \cite{Taylor2007}. The negative values are visualised as dark blue colours (Figure \ref{fig08}) while the peaks are visible in the northern regions of the country with corresponding values of 300 to 400 nT (dark red colours in Figure \ref{fig08}). Moreover, these data conform the records from the Magsat, a satellite specially used for the measurement of the crustal magnetic anomalies of the Earth, and the correspondence of the magnetic data to the surface geology and tectonics in central Africa revealed and reported by \cite{Green}. The magnetic intensity (Figure \ref{fig08}) compared with the Central African geologic and gravity maps (Figure \ref{fig02}, Figure \ref{fig03} and Figure \ref{fig04}) shows that most of the geologic units and geophysical patterns are reflected by the magnetic fields which proves the interrelation between the topography, the geologic structure with the magnetic field data over CAR. 
+
+Lower magnetic values are observed across the gneissic and granitic rocks of the shields and across the greenstone belts of CAR, as well as over the greenstone belt intruded by the Precambrian rocks with ultrabasic dykes. In contrast, the extent of the East Africa Rift correlates with the moderate magnetic values which lie between the -20 to  10 nT (correspond to yellow colours in map of Figure \ref{fig08}) and from +20 to +40 nT in the north-east region of the country (soft orange colours in Figure \ref{fig08}) in Sud geologic Province with Pleistocene outcrops. The highest magnetic values over +60nT (bright red colours in Figure \ref{fig08}) correspond to the distribution of the Precambrian rocks in the south and occasional Tertiary rocks in the north. The most heterogeneous pattern of magnetic data is visible in the West Zair Precambrian Belt where the lowest depressions of dataset contrast with the highest peaks in values (Figure \ref{fig08} cf. Figure \ref{fig02}).
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_08.jpg}
+	\caption{Magnetic anomaly in CAR based on WDMAM with 3 arc minute resolution. Dark blue area indicate the negative Bangui magnetic anomaly in the centre of CAR. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: WDMAM \cite{Lesur}. Cartography source: authors.
+	\label{fig08}}
+\end{figure}
+
+Figure \ref{fig09} shows a detailed view of the anomaly derived from the 2-arc minute resolution grid. It reveals taht the Bangui anomaly consists in three separate segments with a large central negative anomaly having elongated shape and two with positive anomalies situated to north- and southwards of the large negative depression. The Bangui magnetic anomaly derived from the EMAG2 grid illustrates a typical interpolated pattern of the magnetic anomalous  field, magnetised by induction in a zero inclination field \cite{RAVAT2002131}. As the magnetic equator passes near the centre of the surface, the computed-based modelling reveals the distribution of the negative and positive values in Bangui anomaly accordingly. Certain trends exist in data on daily amplitude of the magnetic variation in Bangui magnetic anomaly which demonstrated fluctuations over the long-term period \cite{Zhang,Barbas}. These shown possible fluctuations in the Earth's magnetic field that might be affected by the ionospheric conductivities. However, the visualised dataset is based on the EMAG2 grid which is compiled from the remote sensing observations obtained from the satellite, ship, and airborne magnetic measurements with improved resolution to 2 arc minutes \cite{Maus}.
+ 
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_09.jpg}
+	\caption{Magnetic anomaly in CAR based on EMAG2 with 2 arc minute resolution. Dark blue area indicate the negative Bangui magnetic anomaly. Black and dark grey areas mean the "no data" areas where no magnetic survey was done in the original dataset. Mapping software: GMT v. 6.1.1, \cite{Wessel}. Data source: EMAG2 \cite{Meyer}. Cartography source: authors. 
+	\label{fig09}}
+\end{figure}
+
+Figure \ref{fig10} demonstrate the coherency between the geophysical data, hypsometry and the Bangui magnetic anomaly fields. Thus, the gravity data with -120 mGal Bouguer anomaly, the associated negative depressions in the geoid derived from the EGM2008 and the ETOPO1-based topographic hypsometry over CAR all correlate with the negative values of the Bangui magnetic anomaly  that are below -1000 nT. At the same time, the comparison of the extent of Bangui magnetic anomaly (Figures \ref{fig08} and {fig09} with enlarged view), the composed plot showing the coherency with geophysical data and the geologic maps of CAR (Figures \ref{fig03} and \ref{fig04}) demonstrates the predominant distribution of the Precambrian (pCm) rocks in this critical region that are exposed just under the central area of the magnetic anomaly and depressions in gravity. 
+
+Spatial representativeness of the extent in the raster grids (Figure \ref{fig10}) visualised using combined magnetic, and Bouguer gravity data (WDMAM, EGM2008, IGPP and EMAG2) shows the integrity of the geophysical and geomagnetism in CAR. Using this facetted plot, the correlation is visible between the lowest magnetic data in the extension between the 3°N and 7°N  (contoured as white square in Figure \ref{fig10}) and the corresponding elongated negative depression in the free-air gravity over at 4°N over the basement of West Zair Precambrian Belt which also has a south-west-north-east extension over the territory of CAR. Such correspondence is related to the variations in crustal thicknesses in this region of CAR caused by the tectonic processes, as discussed above. This result allowed the observation of the interrelation of gravity anomalies, with amplitudes ranging from -85 to +80 mGal over CAR with negative values beneath the magnetic anomaly. These contrasts point at the extent of major tectonic structures of CAR:, i.e., the Central African Orogenic Belt on the Precambrian shield and the northern part of the Congo Craton.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.0 cm]{Fig_10.jpg}
+	\caption{Coherency between geophysical grids on CAR. Software: GMT. Cartography: authors. 
+	\label{fig10}}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{Discussion}
+Detecting the patterns in the lithospheric structure using the integrated mapping of gravity, magnetic fields, geoid and topography data is of paramount interest for Earth science. Accordingly, we have presented a GMT console-based method of cartographic data processing, which has been integrated into the geological-geophysical analysis of CAR. The presented GMT-based modular algorithms do not require generating the projects for data processing, as in traditional GIS, but use scripts and the syntax of GMT instead. This enables to perform data processing on the fly. Such an advantage enables to adjust only relatively little parameters in multi-source target datasets mapping for adaptation, textual annotations, accuracy of projections and fine tuning in visualization. The rest is performed by the script automatically which collects the lines of GMT code and implements the workflow without much supervision, i.e., avoiding the need of human intervention. Such technical approach presents a significant benefit of GMT over the conventional software and makes it a valuable instrument for geological and geophysical mapping when several datasets should be processed in an integrated way.
+
+Thus, by utilizing the ’grdhisteq’ module of GMT that models the data values and divides a grid file into equal patches, we performed a histogram equalisation of the topographic ETOPO1 image covering CAR with four cases of relief modelling with the topography divided into the equal-area segments for approximation of the regional topography using equalised, normalized, quadratic and original models. As a result, using Gaussian approximation ,the smooth distribution of the topographic values was demonstrated with notable peaks and depressions in the elevation of CAR that are comparable with geophysical and magnetic grids. The  ’grdfft’ module that couples different grids and performs computation on grids in the frequency domain using Fast Fourier Transform (FFT), the coherency between vertical gradient and free-air gravity anomaly was plotted and visualised along with grids on magnetic, topographic and gravity data. 
+
+We have tested our proposed techniques in the context of the geologic-geophysical setting of CAR where extreme magnetic anomaly is presented in the Bangui area. Overall, seven datasets are processed, visualised, evaluated and analysed: geoid EGM2008, IGPP, GEBOC/SRTM, ETOPO1, EMAG2, WDMAM and USGS geologic datasets. As future work we plan three directions. First, to integrate other datasets to increase of our current dataset selection over central African region. Second, to extend the current methods of cartographic scripting by other modules of GMT. Third, to develop target study area in neighbouring regions of Africa to extend the applications of the proposed cartographic scripting methods. Furthermore, the estimated values of the magnetic lowest negative values between the -1000 nT to -280 nT  were compared to the extent of the topographic and geophysical grids to reveal the correlations between the datasets. The obtained results shown in the maps demonstrated that the gravity contrasts related to the magnetic anomaly are strongly linked with the tectonic structures and geologic data on CAR. 
+
+Moreover, in CAR, data related to lithospheric structure and tectonic models along with their effects on geophysical and geomagnetic data are very limited. With this regard, mapping the magnetic and gravity anomalies analysed in the context of the regional geologic and tectonic development of CAR region contributes both to the theoretical investigation on geotectonic and geological setting in this area and to the practical increase of data aimed at mineral exploration in CAR. With respect to practical geologic exploration of natural resources in CAR, mapping the coherency between the Bangui magnetic anomaly, geophysical data and geologic setting for mineral resource distribution contributes to the analysis of Earth's structure and thus has a direct impact on the economic exploration of mineral resources which is of importance in CAR.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+This paper describes the correlation between the distribution of rocks with high magnetism in the central part of the Bangui anomaly of CAR, geologic fields of granites, greenstone belts, and the metamorphosed basalts as rock exposures. Moreover, it presented and compared the data on negative Bouguer anomaly below the -80 mGal with low geoid values and the distribution of the magnetic contrast with anomalous negative values ranging in the amplitude of -1000 to -200 nT. The scripts used from the GMT were adapted to each processed image for semi-automatic workflow, allowing the comparison of these data which. Experimental applications of the GMTS scripts validate the proposed method in different multi-source geospatial data processing.  
+
+In this paper, we presented a cartographic interpretation of the Bangui Magnetic Anomaly and analysed its consistence with the available data on geophysical and geological setting of the CAR using introduced scripting cartographic framework that uses codes written in GMT syntax for automation of cartographic workflow. We have shown that the distribution of the Bangui Magnetic Anomaly correlates with the negative values in gravity and geoid as well as depressions in regional topography. Technically, we optimised the operational workflow of the cartographic work due to the use of scripts. As a result, it does better at presenting and computing the coherency in complex phenomena in the Earth critical zone in central Africa that reveals the nonlinear relationships between the tectonic evolution and geophysical processes, reflected in local variations in regional topography.
+
+From the cartographic perspective, we proposed a framework for mapping several geospatial datasets using GMT scripts to reveal the coherency in geophysical data. The scripts are presented in the Methodology section with added comments on the most essential details of code. We quantitatively evaluated the distribution of values in topographic, gravity and magnetic contrasts over CAR using high-resolution available datasets: EMAG2, WDMAM for magnetic anomalies, GEBCO/SRTM and ETOPO1 for topography, IGPP for gravity grids, EGM2008 for geoid undulations and the USGS data on the geology of CAR. Our experiments show that scripting approach of GMT can significantly reduce the workload of mapping compared to the QGIS while yielding the solution on quality of maps aimed at obtaining the print-quality maps. Our approach is to be flexible enough to deal with multi-source datasets of various formats and origin as well as rapid plotting of several maps in identical projection and spatial extent for comparability. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
+
+\funding{The publication was funded by the Editorial Office of \emph{Minerals}, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Not applicable} 
+
+\acknowledgments{The authors thank the reviewers for reading and review of this manuscript.}
+
+\conflictsofinterest{The authors declare no conflict of interest.} 
+
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+CAR & Central African Republic \\
+CGMW & Commission for the Geological Map of the World \\
+EGM2008 & Earth Gravitational Model 2008 \\
+EMAG2 & Earth Magnetic Anomaly Grid \\
+ETOPO1 & Earth Topography Model with 1 arc minute resolution\\
+FFT & Fast Fourier Transform \\
+GEBCO & General Bathymetric Chart of the Oceans \\
+GMT & Generic Mapping Tools \\
+IAGA & International Association of Geomagnetism and Aeronomy \\
+IGPP & Institute of Geophysics and Planetary Physics \\
+SRTM & Shuttle Radar Topography Mission \\
+USGS & United States Geological Survey \\
+WDMAM & World Digital Magnetic Anomaly Map \\
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{adjustwidth}{-\extralength}{0cm}
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+%\nocite{*}
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{Bangui.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{adjustwidth}
+\end{document}
