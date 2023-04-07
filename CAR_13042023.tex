@@ -172,184 +172,19 @@ This study is based on the several gravity and geologic databases: two gravity d
 
 The equalisation of the topographic grids was determined by means of the 'grdhisteq' module of the GMT by four different approaches in modelling elevation data: original, equalised, quadratic and normalised. A sequence of different GMT auxiliary modules was used to plot the map: 'pscoast', 'makecpt', 'grdimage', 'psscale' and annotations added by a combination of 'echo' and 'pstext'. The parameters of the commands are defined for fine cartographic adjustments and presented as a full code in Listing \ref{lst01}. The comparison of the processed topographic grids regularised the non-linear models in hypsometry to evaluate the extremities in the data covering the regions and highlight the depressions and peaks in the elevation models.
 
-\begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids,style=mystyle,label={lst01}]
-exec bash
-gmt grdcut ETOPO1_Ice_g_gmt4.grd -R14/28/2/11.5 -Gcf1_relief.nc
-ps=HistCAR.ps
-gmt makecpt -Crainbow -V -T212/1820 > t.cpt
-gmt makecpt -Crainbow -T0/15/1 > c.cpt
-# 1 upper left plot
-gmt grdhisteq cf1_relief.nc -Gout.nc -C16
-gmt grdimage cf1_relief.nc -I+a45+nt1 -Ct.cpt -JM3i -Y6i -K -P \
-    -Bpxg4f1a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe > $ps
-echo "24 10 Original" | gmt pstext -Rcf1_relief.nc -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
-gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
-# 2 upper right plot
-gmt grdimage out.nc -Cc.cpt -J -X3.5i -K -O \
-    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
-gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
-echo "24 10 Equalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
-gmt psscale -Dx0i/-0.4i+jTC+w5i/0.15i+h+e+n -O -K -Ct.cpt -Bg200f10a200 -By+lm >> $ps
-# 3 low left plot
-gmt grdhisteq cf1_relief.nc -Gout.nc -N
-gmt makecpt -Crainbow -T-3/3 > c.cpt
-gmt grdimage out.nc -Cc.cpt -J -X-3.5i -Y-3.0i -K -O \
-    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
-gmt grdcontour cf1_relief.nc -R -J -C200 -A500+f7p,26,blue -Wthinnest,blue -O -K >> $ps
-echo "23.5 10 Normalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T \
-    -UBL/-5p/-4.0c -Gwhite@10 -Dj0.1i >> $ps
-gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
-# 4 low right plot
-gmt grdhisteq cf1_relief.nc -Gout.nc -Q
-gmt makecpt -Crainbow -T0/15 > q.cpt
-gmt grdimage out.nc -Cq.cpt -J -X3.5i -K -O \
-    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
-gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
-echo "24 10 Quadratic" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
-gmt psscale -Dx0i/-0.4i+w5i/0.15i+h+jTC+e+n -O -K -Cc.cpt -Bg0.5f0.1a1 -By+l"z@-n@-" >> $ps
-gmt psscale -Dx0i/-1.0i+w5i/0.15i+h+jTC+e+n -O -K -Cq.cpt -Bg0.5f0.2a1 -By+l"z@-q@-" >> $ps
-gmt logo -Dx0.0/-4.5c+o-1.0c/0.2c+w2c -O -K >> $ps
-gmt pstext -R0/10/0/15 -JX10/10 -X-8.0 -Y6.5c -N -O \
--F+f14p,Palatino-Roman,black+jLB >> $ps << EOF
-0.0 11.5 Central African Republic: histogram equalization of topographic grid:
-1.5 10.7 ETOPO1 DEM Global Relief Model 1 arc min resolution
-EOF
-gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
-\end{lstlisting}
-
 %----------- subsection ----------->
 \subsection{Geoid}
 The first processing step consisted of converting the ADF file into the GDR by 'grdconvert' using tile to the extent of CAR applied to the area of n00e00 in the global gravity data (Listing \ref{lst02}). Afterwards, the extent of data range was evaluated for the image using 'gdalinfo' module and the cpt was adjusted accordingly using the 'makecpt' module. Extracting the image was done using the 'grdimage' module with extensions applied to the actual extent of the country (-R14/28/2/11.5), that is, considering a EGM2008 clipped and extended over an area between 14°-28°N of parallels and 2°-11.5°E of meridian. 
 
 All the isolines were added on the image and interpolated with a 0.5 m step and annotations every 1 m to visuallise the trends in variations of values. To obtain the cartographic grid, ticks and annotations of graticule, the 'psbasemap' module was used with relevant parameters adjusted by flags, as shown in Listing \ref{lst02}. Auxiliary elements were added using the 'pscoast' and 'pstext' modules for map to be completed. The GMT script written for plotting geoid and shown in Listing \ref{lst02} was used as the basis for plotting the maps of topography and vertical gravity gradient in CAR with adjusted elements in codes and changed datasets processed in scripts, accordingly.
 
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
-exec bash
-gmt grdconvert n00e00/w001001.adf geoid_CF.grd
-gdalinfo geoid_CF.grd -stats
-gmt makecpt -Cjet.cpt -T-18/18 > colors.cpt
-ps=Geoid_CF.ps
-gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
-gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
-gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
-    --FORMAT_GEO_MAP=ddd:mm:ssF \
-    --MAP_GRID_CROSS_SIZE_PRIMARY=0.8c \
-    --MAP_GRID_CROSS_SIZE_SECONDARY=0.5c \
-    -Bpx1f1a1 -Bpyg1f1a1 -Bsxg1 -Bsyg1 \
-    -B+t"Earth geoid model on Central African Republic" -O -K >> $ps
-gmt psscale -Dg14/1.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
-    -Bg2f0.2a4+l"Color scale 'jet': dark to light blue, white, yellow and red [C=RGB], -T-18/18]" \
-    -I0.2 -By+lm -O -K >> $ps
-gmt psbasemap -R -J -Tmg26/3.6+w3.0c+d1.63+t45/10/5+ithin,lightgoldenrod+p0.1p,gold+l+jCM -O -K >> $ps
-gmt psbasemap -R -J -Lx14.5c/-2.3c+c50+w300k+l"Mercator projection. Scale (km)"+f \
-    -UBL/-0p/-70p -O -K >> $ps
-gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thick,white -Wthick,darkslategray -Df -O -K >> $ps
-gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
-gmt pstext -R0/10/0/15 -JX10/10 -X0.1c -Y4.5c -N -O \
-    -F+f10p,25,black+jLB >> $ps << EOF
-3.0 10.4 Earth geoid image EGM2008 vertical datum 2.5 min resolution
-EOF
-gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
-\end{lstlisting}
-
 %----------- subsection ----------->
 \subsection{IGPP Earth Free-Air Anomaly}
 Gravity data were extracted from the EGM2008 database with global coverage resulting from the spherical harmonic models of the Earth's gravitational potential by \cite{Pavlis}. Diverse data processing algorithms were applied using GMT modules as shown below in Listing \ref{lst03}. The raster image was visualised using the 'grdimage' modules with isolines added as contours with 20 m interval by the 'grdcontour' module. The 'Haxby' colour palette was applied, specially designed for gravity grids and visualising the geophysical data. The colour palette was adjusted according to the amplitude and geometry of the observed values in the raster grids, which were checked using the 'gdalinfo' module. The rest of the cartographic elements was added using the sequence of modules GMT such as 'psbasemap', 'pscoast', 'pstext' and more, as shown in Listing \ref{lst03}.
 
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst03}]
-exec bash
-gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
-gdalinfo grav_CF.grd -stats
-gmt makecpt -Chaxby.cpt -T-85/80 > colors.cpt
-ps=Grav_CF.ps
-gmt grdimage grav_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.0i -P -I+a15+ne0.75 -Xc -K > $ps
-gmt grdcontour grav_CF.grd -R -J -C20 -A40 -Wthinner -O -K >> $ps
-gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
-    --FORMAT_GEO_MAP=ddd:mm:ssF \
-    -Bpx4f2a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 \
-    -B+t"Free-air gravity anomaly on Central African Republic" -O -K >> $ps
-gmt psscale -Dg14/1+w15.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
-    -Bg20f1a10+l"Color scale 'haxby' Bill Haxby's color scheme for geoid & gravity [C=RGB] -T-200/200]" \
-    -I0.2 -By+l"mGal" -O -K >> $ps
-gmt psbasemap -R -J -Tdg15/10.5+w1.5c+f3+l -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
-    -UBL/-0p/-70p -O -K >> $ps
-gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thickest,deeppink1 -Wthin,darkslategray -Df -O -K >> $ps
-gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
-gmt pstext -R0/10/0/15 -JX10/10 -X0.5c -Y5.0c -N -O \
-    -F+f10p,25,black+jLB >> $ps << EOF
-2.3 9.2 IGPP Global Earth Free-Air Anomaly, 0.025 mGal resolution
-EOF
-gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
-\end{lstlisting}
-
 \subsection{Coherency of geophysical grids}
 
 The comparison of several maps allow the analysis of the correspondence of the crustal structure in the CAR region, the estimation of topographic heights and hypsometry and coherency in gravity and vertical gravity gradient. Such data integration allows better understanding of the geophysical and topographic responses on the inner behaviour of the lithosphere and tectonic structure of CAR region, and their correspondence with magnetic contrasts. The analyses of the coherency used for plotting the graph was performed using the GMT module 'grdfft' which process the data using the Fast Fourier Transform, estimates the cross-spectral for the co-registered gravity grids (mGal), and reports the result as functions of the symmetry reflection between the both grids. To this end, the data were compiled and processed using the code in Listing \ref{lst04}. 
-
-\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
-# Extract subsets of img/grd files in geographic format ----------------->
-gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
-gmt grdconvert n00e00/w001001.adf geoid_CF.grd
-gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
-gmt img2grd curv_27.1.img -R14/28/2/11.5 -Ggravvert_CF.grd -T1 -I1 -E -S0.1 -V
-gmt grdcut EMAG2_V2.grd -R14/28/2/11.5 -Gcf_mag.nc
-gmt grdcut @earth_wdmam_03m -R14/28/2/11.5 -Gcf_mag_wdmam.nc
-gmt grdfft cf_mag_wdmam.nc cf_relief.nc -E+wk+n -Na+d+wtmp > cross_spectra1.txt
-gmt set FONT_TITLE 12p GMT_FFT kiss
-# make cpt for rasters ----------------->
-gmt makecpt -Cturbo -T212/1820 > z.cpt # topo
-gmt makecpt -Crainbow -T-18/18 > g.cpt # geoid
-gmt makecpt -Cjet.cpt -T-40/40 > c.cpt # grav
-gmt makecpt -Chaxby.cpt -T-85/80 > d.cpt # vert grav
-gmt makecpt -Cwysiwyg.cpt -T-1000/512 > m.cpt # EMAG2
-gmt makecpt -Cmag -T-933/375 > n.cpt # WDMAM
-ps=Coherency_CF.ps
-# map 1 lower left ----------------->
-gmt grdimage cf_relief.nc -R14/28/2/11.5 \
-    -I+a0+nt1 -JM6.0c -Cz.cpt -P -K -X1.474i -Y1i > $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c \
-    -Ba -BWSne+t"IGPP Global Earth Relief"  -UBL/-5p/-40p \
-    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
-# map 2 lower right ----------------->
-gmt grdimage geoid_CF.grd -R14/28/2/11.5 \
-    -I+a0+nt1 -JM6.0c -Cg.cpt -O -K -X7.5c >> $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c \
-    --MAP_TITLE_OFFSET=0.1c -Ba -BWSne+t"Geoid model EGM2008" -O -K  >> $ps
-# map 3 upper left ----------------->
-gmt grdimage gravvert_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
-    -Cc.cpt -O -K -X-7.5c -Y6.0c >> $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba \
-    -BWSne+t"Vertical gravity gradient" \
-    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
-# map 4 upper right ----------------->
-gmt grdimage grav_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cd.cpt -O -K -X7.5c >> $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"Free-air gravity anomaly" \
-    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
-# map 5 upper left EMAG2 ----------------->
-gmt grdimage cf_mag.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
-    -Cm.cpt -O -K -X-7.5c -Y6.0c >> $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"EMAG2 for CAR" \
-    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
-# Bangui magnetic anomaly
-gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
-# map 6 upper right ----------------->
-gmt grdimage cf_mag_wdmam.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cn.cpt -O -K -X7.5c >> $ps
-gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
-gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"WDMAM for CAR" \
-    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
-# plot coherency ----------------->
-gmt psxy -R3/100/0/1 -JX14.0cl/3.5c -Bx2g3+u"mGal" -Byaf0.04g0.2+l"Coherency@+2@+" \
-    -BWSnE+t"Coherency between vertical gradient and free-air gravity anomaly"+gazure \
-    --MAP_GRID_PEN_PRIMARY=thinnest,dimgray \
-    --MAP_GRID_PEN_SECONDARY=thinner,dimgray \
-    -X-7.5cm -Y6.0c cross_spectra.txt -i0,15 -W0.1p -O -K >> $ps
-gmt psxy -R -J cross_spectra.txt -i0,15,16 -Sc0.15c -Gred -W0.25p -Ey -O -K >> $ps
-gmt logo -Dx7.5c/-2.0c+o-2.0c/-17.5c+w2c -O >> $ps
-# Convert to image file by GhostScript
-gmt psconvert Coherency_CF.ps -A1.0c -E720 -Tj -Z
-# Unix remove files 
-rm -f cross.txt *_tmp.nc ?.cpt bbox
-\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\pagebreak
@@ -486,7 +321,179 @@ WDMAM & World Digital Magnetic Anomaly Map \\
 \end{tabular}
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendixtitles{no} % Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+\appendixstart
+\appendix
+\section[\appendixname~\thesection]{GMT scripts}
+\subsection[\appendixname~\thesubsection]{GMT script for computing the histogram equalisation of CAR's topographic grids}
+
+\begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids,style=mystyle,label={lst01}]
+exec bash
+gmt grdcut ETOPO1_Ice_g_gmt4.grd -R14/28/2/11.5 -Gcf1_relief.nc
+ps=HistCAR.ps
+gmt makecpt -Crainbow -V -T212/1820 > t.cpt
+gmt makecpt -Crainbow -T0/15/1 > c.cpt
+# 1 upper left plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -C16
+gmt grdimage cf1_relief.nc -I+a45+nt1 -Ct.cpt -JM3i -Y6i -K -P \
+    -Bpxg4f1a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe > $ps
+echo "24 10 Original" | gmt pstext -Rcf1_relief.nc -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+# 2 upper right plot
+gmt grdimage out.nc -Cc.cpt -J -X3.5i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+echo "24 10 Equalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt psscale -Dx0i/-0.4i+jTC+w5i/0.15i+h+e+n -O -K -Ct.cpt -Bg200f10a200 -By+lm >> $ps
+# 3 low left plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -N
+gmt makecpt -Crainbow -T-3/3 > c.cpt
+gmt grdimage out.nc -Cc.cpt -J -X-3.5i -Y-3.0i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt grdcontour cf1_relief.nc -R -J -C200 -A500+f7p,26,blue -Wthinnest,blue -O -K >> $ps
+echo "23.5 10 Normalized" | gmt pstext -R -J -O -K -F+jBL+f12p -T \
+    -UBL/-5p/-4.0c -Gwhite@10 -Dj0.1i >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+# 4 low right plot
+gmt grdhisteq cf1_relief.nc -Gout.nc -Q
+gmt makecpt -Crainbow -T0/15 > q.cpt
+gmt grdimage out.nc -Cq.cpt -J -X3.5i -K -O \
+    -Bpxg4f2a4 -Bpyg4f2a2 -Bsxg2 -Bsyg2 -BWSNe >> $ps
+gmt pscoast -R -J -Ia/thinner,blue -Na -N1/thick,white -W0.1p -Df -O -K >> $ps
+echo "24 10 Quadratic" | gmt pstext -R -J -O -K -F+jBL+f12p -T -Gwhite@10 -Dj0.1i >> $ps
+gmt psscale -Dx0i/-0.4i+w5i/0.15i+h+jTC+e+n -O -K -Cc.cpt -Bg0.5f0.1a1 -By+l"z@-n@-" >> $ps
+gmt psscale -Dx0i/-1.0i+w5i/0.15i+h+jTC+e+n -O -K -Cq.cpt -Bg0.5f0.2a1 -By+l"z@-q@-" >> $ps
+gmt logo -Dx0.0/-4.5c+o-1.0c/0.2c+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X-8.0 -Y6.5c -N -O \
+-F+f14p,Palatino-Roman,black+jLB >> $ps << EOF
+0.0 11.5 Central African Republic: histogram equalization of topographic grid:
+1.5 10.7 ETOPO1 DEM Global Relief Model 1 arc min resolution
+EOF
+gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
+\end{lstlisting}
+
+\subsection[\appendixname~\thesubsection]{GMT script for mapping the Earth geoid model on CAR}
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
+exec bash
+gmt grdconvert n00e00/w001001.adf geoid_CF.grd
+gdalinfo geoid_CF.grd -stats
+gmt makecpt -Cjet.cpt -T-18/18 > colors.cpt
+ps=Geoid_CF.ps
+gmt grdimage geoid_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.5i -P -Xc -I+a15+ne0.75 -K > $ps
+gmt grdcontour geoid_CF.grd -R -J -C0.5 -A1.0+f8p,0,black -Wthinner,dimgray -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    --MAP_GRID_CROSS_SIZE_PRIMARY=0.8c \
+    --MAP_GRID_CROSS_SIZE_SECONDARY=0.5c \
+    -Bpx1f1a1 -Bpyg1f1a1 -Bsxg1 -Bsyg1 \
+    -B+t"Earth geoid model on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1.5+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg2f0.2a4+l"Color scale 'jet': dark to light blue, white, yellow and red [C=RGB], -T-18/18]" \
+    -I0.2 -By+lm -O -K >> $ps
+gmt psbasemap -R -J -Tmg26/3.6+w3.0c+d1.63+t45/10/5+ithin,lightgoldenrod+p0.1p,gold+l+jCM -O -K >> $ps
+gmt psbasemap -R -J -Lx14.5c/-2.3c+c50+w300k+l"Mercator projection. Scale (km)"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thick,white -Wthick,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.1c -Y4.5c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+3.0 10.4 Earth geoid image EGM2008 vertical datum 2.5 min resolution
+EOF
+gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
+\end{lstlisting}
+
+\subsection[\appendixname~\thesubsection]{GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR}
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst03}]
+exec bash
+gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
+gdalinfo grav_CF.grd -stats
+gmt makecpt -Chaxby.cpt -T-85/80 > colors.cpt
+ps=Grav_CF.ps
+gmt grdimage grav_CF.grd -Ccolors.cpt -R14/28/2/11.5 -JM6.0i -P -I+a15+ne0.75 -Xc -K > $ps
+gmt grdcontour grav_CF.grd -R -J -C20 -A40 -Wthinner -O -K >> $ps
+gmt psbasemap -R -J --MAP_FRAME_AXES=WEsN \
+    --FORMAT_GEO_MAP=ddd:mm:ssF \
+    -Bpx4f2a2 -Bpyg4f2a2 -Bsxg2 -Bsyg2 \
+    -B+t"Free-air gravity anomaly on Central African Republic" -O -K >> $ps
+gmt psscale -Dg14/1+w15.0c/0.15i+h+o0.3/0i+ml+e -R -J -Ccolors.cpt \
+    -Bg20f1a10+l"Color scale 'haxby' Bill Haxby's color scheme for geoid & gravity [C=RGB] -T-200/200]" \
+    -I0.2 -By+l"mGal" -O -K >> $ps
+gmt psbasemap -R -J -Tdg15/10.5+w1.5c+f3+l -Lx13.5c/-2.3c+c50+w300k+l"Mercator projection. Scale: km"+f \
+    -UBL/-0p/-70p -O -K >> $ps
+gmt pscoast -R -J -P -Ia/thinnest,blue -Na -N1/thickest,deeppink1 -Wthin,darkslategray -Df -O -K >> $ps
+gmt logo -Dx7.0/-3.1+o0.1i/0.1i+w2c -O -K >> $ps
+gmt pstext -R0/10/0/15 -JX10/10 -X0.5c -Y5.0c -N -O \
+    -F+f10p,25,black+jLB >> $ps << EOF
+2.3 9.2 IGPP Global Earth Free-Air Anomaly, 0.025 mGal resolution
+EOF
+gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
+\end{lstlisting}
+
+\subsection[\appendixname~\thesubsection]{GMT script for estimating the coherency between geophysical grids on CAR}
+\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
+# Extract subsets of img/grd files in geographic format ----------------->
+gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
+gmt grdconvert n00e00/w001001.adf geoid_CF.grd
+gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
+gmt img2grd curv_27.1.img -R14/28/2/11.5 -Ggravvert_CF.grd -T1 -I1 -E -S0.1 -V
+gmt grdcut EMAG2_V2.grd -R14/28/2/11.5 -Gcf_mag.nc
+gmt grdcut @earth_wdmam_03m -R14/28/2/11.5 -Gcf_mag_wdmam.nc
+gmt grdfft cf_mag_wdmam.nc cf_relief.nc -E+wk+n -Na+d+wtmp > cross_spectra1.txt
+gmt set FONT_TITLE 12p GMT_FFT kiss
+# make cpt for rasters ----------------->
+gmt makecpt -Cturbo -T212/1820 > z.cpt # topo
+gmt makecpt -Crainbow -T-18/18 > g.cpt # geoid
+gmt makecpt -Cjet.cpt -T-40/40 > c.cpt # grav
+gmt makecpt -Chaxby.cpt -T-85/80 > d.cpt # vert grav
+gmt makecpt -Cwysiwyg.cpt -T-1000/512 > m.cpt # EMAG2
+gmt makecpt -Cmag -T-933/375 > n.cpt # WDMAM
+ps=Coherency_CF.ps
+# map 1 lower left ----------------->
+gmt grdimage cf_relief.nc -R14/28/2/11.5 \
+    -I+a0+nt1 -JM6.0c -Cz.cpt -P -K -X1.474i -Y1i > $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c \
+    -Ba -BWSne+t"IGPP Global Earth Relief"  -UBL/-5p/-40p \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 2 lower right ----------------->
+gmt grdimage geoid_CF.grd -R14/28/2/11.5 \
+    -I+a0+nt1 -JM6.0c -Cg.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c \
+    --MAP_TITLE_OFFSET=0.1c -Ba -BWSne+t"Geoid model EGM2008" -O -K  >> $ps
+# map 3 upper left ----------------->
+gmt grdimage gravvert_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
+    -Cc.cpt -O -K -X-7.5c -Y6.0c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba \
+    -BWSne+t"Vertical gravity gradient" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 4 upper right ----------------->
+gmt grdimage grav_CF.grd -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cd.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"Free-air gravity anomaly" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# map 5 upper left EMAG2 ----------------->
+gmt grdimage cf_mag.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c \
+    -Cm.cpt -O -K -X-7.5c -Y6.0c >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"EMAG2 for CAR" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# Bangui magnetic anomaly
+gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
+# map 6 upper right ----------------->
+gmt grdimage cf_mag_wdmam.nc -R14/28/2/11.5 -I+a0+nt1 -JM6.0c -Cn.cpt -O -K -X7.5c >> $ps
+gmt psbasemap -R -J -D18/5/22/7r -F+pthickest,white -O -K >> $ps
+gmt psbasemap -R14/28/2/11.5 -JM6.0c -Ba -BWSne+t"WDMAM for CAR" \
+    --MAP_TITLE_OFFSET=0.1c -O -K >> $ps
+# plot coherency ----------------->
+gmt psxy -R3/100/0/1 -JX14.0cl/3.5c -Bx2g3+u"mGal" -Byaf0.04g0.2+l"Coherency@+2@+" \
+    -BWSnE+t"Coherency between vertical gradient and free-air gravity anomaly"+gazure \
+    --MAP_GRID_PEN_PRIMARY=thinnest,dimgray \
+    --MAP_GRID_PEN_SECONDARY=thinner,dimgray \
+    -X-7.5cm -Y6.0c cross_spectra.txt -i0,15 -W0.1p -O -K >> $ps
+gmt psxy -R -J cross_spectra.txt -i0,15,16 -Sc0.15c -Gred -W0.25p -Ey -O -K >> $ps
+gmt logo -Dx7.5c/-2.0c+o-2.0c/-17.5c+w2c -O >> $ps
+# Convert to image file by GhostScript
+gmt psconvert Coherency_CF.ps -A1.0c -E720 -Tj -Z
+# Unix remove files 
+rm -f cross.txt *_tmp.nc ?.cpt bbox
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{adjustwidth}{-\extralength}{0cm}
