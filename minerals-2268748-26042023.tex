@@ -383,7 +383,7 @@ From a cartographic perspective, we proposed an advanced framework for mapping s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and~project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and~investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
 
-\funding{The publication was funded by the Editorial Office of \emph{\hl{Minerals}}, %MDPI: Please confirm if the italics is unnecessary and can be removed. The following highlights are the same.
+\funding{The publication was funded by the Editorial Office of Minerals, %MDPI: Please confirm if the italics is unnecessary and can be removed. The following highlights are the same. % <-- Authors' reply: not necessary, we removed it.
 Multidisciplinary Digital Publishing Institute (MDPI), by~providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy---BELSPO (B2/202/P2/SEISMOSTORM).}
 
 \institutionalreview{Not applicable.}
@@ -421,11 +421,10 @@ WDMAM & World Digital Magnetic Anomaly Map \\
 \appendixstart
 \appendix
 \section[\appendixname~\thesection]{GMT Scripts} \label{app}
-\subsection[\appendixname~\thesubsection]{\hl{GMT Script for Computing the Histogram Equalisation of CAR's Topographic Grids}} %MDPI: All highlighted title is the same as Listing below the title, please confirm if it can be removed, the titles of them seem duplicated.
+\subsection[\appendixname~\thesubsection]{} %MDPI: All highlighted title is the same as Listing below the title, please confirm if it can be removed, the titles of them seem duplicated. % <-- Authors' reply: yes, we agree and confirm. The duplicated titles are removed in the Appendices. 
 
 \setcounter{lstlisting}{0}
 \renewcommand\thelstlisting{A\arabic{lstlisting}} 
-
 
 \begin{lstlisting}[language=bash,caption=GMT script for computing the histogram equalisation of CAR's topographic grids.,style=mystyle,label={lst01}]
 #!/bin/bash
@@ -472,8 +471,8 @@ EOF
 gmt psconvert HistCAR.ps -A0.5c -E720 -Tj -Z
 \end{lstlisting}
 
-\subsection[\appendixname~\thesubsection]{\hl{GMT Script for Mapping the Earth Geoid Model on CAR}}
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR.,style=mystyle,label={lst02}]
+\subsection[\appendixname~\thesubsection]{}
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the Earth geoid model on CAR,style=mystyle,label={lst02}]
 #!/bin/bash
 gmt grdconvert n00e00/w001001.adf geoid_CF.grd
 gdalinfo geoid_CF.grd -stats
@@ -502,8 +501,8 @@ EOF
 gmt psconvert Geoid_CF.ps -A1.0c -E720 -Tj -Z
 \end{lstlisting}
 
-\subsection[\appendixname~\thesubsection]{\hl{GMT Script for Mapping the IGPP Earth Free-Air Anomaly on CAR}}
-\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR.,style=mystyle,label={lst03}]
+\subsection[\appendixname~\thesubsection]{}
+\begin{lstlisting}[language=bash,caption=GMT script for mapping the IGPP Earth Free-Air Anomaly on CAR,style=mystyle,label={lst03}]
 #!/bin/bash
 gmt img2grd grav_27.1.img -R14/28/2/11.5 -Ggrav_CF.grd -T1 -I1 -E -S0.1 -V
 gdalinfo grav_CF.grd -stats
@@ -530,8 +529,8 @@ gmt psconvert Grav_CF.ps -A0.5c -E720 -Tj -Z
 \end{lstlisting}
 
 
-\subsection[\appendixname~\thesubsection]{\hl{GMT Script for Estimating the Coherency between Geophysical Grids on CAR}}
-\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR.,style=mystyle,label={lst04}]
+\subsection[\appendixname~\thesubsection]{}
+\begin{lstlisting}[language=bash,caption=GMT script for estimating the coherency between geophysical grids on CAR,style=mystyle,label={lst04}]
 #!/bin/bash
 # Extract subsets of img/grd files in geographic format ----------------->
 gmt grdcut GEBCO_2019.nc -R14/28/2/11.5 -Gcf_relief.nc
